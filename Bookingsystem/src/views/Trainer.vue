@@ -1,12 +1,12 @@
 <script setup>
     import LoginForm from '@/components/LoginForm.vue';
-    import Tilbage from '@/components/Tilbage.vue';
+    import Back from '@/components/Back.vue';
     import LoggedIn from '@/components/LoggedIn.vue';
 
 </script>
 
 <template>
-    <Tilbage />
+    <Back />
 
     <LoginForm />
     <LoggedIn />
