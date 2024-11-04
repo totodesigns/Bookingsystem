@@ -8,3 +8,6 @@
     <h1>Se booket tider</h1>
     <button>Se tider</button>
 </template>
+
+<style scoped>
+ </style>
