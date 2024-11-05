@@ -3,6 +3,7 @@
 </script>
 
 <template>
+    <Back />
     <div>
         <h1>Kalender</h1>
         <h2>Klik på tiderne nedenunder for at vælge</h2>
