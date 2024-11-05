@@ -1,7 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore"; // Import Firestore
-// go back to https://firebase.google.com/docs/web/setup if you need stuff bro
+import { getDatabase } from "firebase/database"; // For Realtime Database
 
 // stuff for firebase configuration
 const firebaseConfig = {
@@ -12,13 +11,10 @@ const firebaseConfig = {
   storageBucket: "bookingsystem-757c2.firebasestorage.app",
   messagingSenderId: "1067504687830",
   appId: "1:1067504687830:web:2d651730bd53c909b80777",
-  measurementId: "G-4172TH1XYY"
 };
 
 // Initialize firebase and login + db things
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-
-const db = getFirestore(app); // Initialize firestore (database)
-
+const db = getDatabase(app);
 export { auth, db };
