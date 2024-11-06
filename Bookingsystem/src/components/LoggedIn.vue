@@ -8,13 +8,13 @@ const time = ref("");
 const creatorName = ref(""); // Variable for the display name
 const message = ref("");
 
-// Reference to firesore collection
+// Reference to firebase db
 const appointmentsRef = dbRef(db, "trainerInfo/sessions");
 
 // async-await makes it so that it has to wait for addDoc before beign able to continue
 async function postTime() {
   try {
-    // Adds the info to firestore db
+    // Adds the info to firebase db
     await push(appointmentsRef, {
       date: date.value,
       time: time.value,
