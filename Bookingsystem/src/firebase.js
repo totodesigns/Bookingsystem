@@ -1,8 +1,10 @@
+
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getDatabase } from "firebase/database"; // For Realtime Database
-
 // stuff for firebase configuration
+=======
+
 const firebaseConfig = {
   apiKey: "AIzaSyBU17v3pqmoL-3pBY9Ca_reti5yX8yyYDA",
   authDomain: "bookingsystem-757c2.firebaseapp.com",
@@ -18,3 +20,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getDatabase(app);
 export { auth, db };
+=======
+  measurementId: "G-4172TH1XYY"
+};
+
