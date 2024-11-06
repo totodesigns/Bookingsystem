@@ -1,6 +1,5 @@
 
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
 import { getDatabase } from "firebase/database"; // For Realtime Database
 // stuff for firebase configuration
 
@@ -16,7 +15,6 @@ const firebaseConfig = {
 
 // Initialize firebase and login + db things
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
 const db = getDatabase(app);
-export { auth, db };
+export { db };
 

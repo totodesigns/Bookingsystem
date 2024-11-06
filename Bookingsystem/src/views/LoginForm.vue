@@ -1,38 +1,43 @@
 <script setup>
 import { ref } from "vue";
-import { useRouter } from "vue-router"; // Import for route navigation
-import { auth } from "../firebase"; // Import Firebase auth module
-import { signInWithEmailAndPassword } from "firebase/auth"; // Import signIn method
+import { useRouter } from "vue-router";
+import { db } from "../firebase";
+import { ref as dbRef, get } from "firebase/database";
 
-// Define reactive variables
 const email = ref("");
 const password = ref("");
 const error = ref(null);
-
-// Access the router for navigation
 const router = useRouter();
 
-// Define the login function
 async function login() {
-  error.value = null; // Reset any previous error messages
   try {
-    // Sign in using Firebase Authentication
-    await signInWithEmailAndPassword(
-      auth, 
-      email.value, 
-      password.value,
-    );
-// Redirect to the loggedin on success, path made in index.js
-    router.push("/chooseoption"); 
-  } catch (err) {
-    error.value = "Something went wrong! :(";
-  };
-};
+    const usersRef = dbRef(db, 'trainerInfo'); //pointing to the database > trainerinfo
+    const trainers = await get(usersRef); //'trainerInfo' users
+    const trainersinfo = trainers.val(); // extract data from trainers and puts it into trainersinfo (userId + email + password)
+    let userFound = false; // sets valid user to false by default
 
+      // Loop through each user and check the email and password
+      for (const userId in trainersinfo) { //userId is the key that firebase gives to the push() objects
+        const user = trainersinfo[userId]; //user is the contents of userId, so like email and password
+
+        if (user.email === email.value && user.password === password.value) { //checks if the email in database is the same as user input aswell as pw
+          userFound = true; // match? break loop
+          break;
+        }
+      }
+      if (userFound) { // if true go next
+        router.push("/chooseoption");
+      }
+     
+
+  } catch (err) {
+    console.error("Error during login:", err);
+    error.value = "Something went wrong during login.";
+  }
+}
 const skip = () => {
   router.push("/chooseoption");
-}
-
+};
 </script>
 
 <template>

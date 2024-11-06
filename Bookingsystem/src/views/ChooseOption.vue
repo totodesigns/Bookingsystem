@@ -5,8 +5,6 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 
 import Back from '@/components/Back.vue'
-import PostSession from '@/views/PostSession.vue'
-import Sessions from '@/views/Sessions.vue'
 
 let goToPostSession = () => {
     router.push("/postsession");
