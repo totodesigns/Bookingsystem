@@ -3,6 +3,8 @@ import { ref } from "vue";
 import { db } from "../firebase"; // Realtime databse setup
 import { push, ref as dbRef } from "firebase/database";
 
+import Back from '@/components/Back.vue';
+
 const date = ref("");
 const time = ref("");
 const creatorName = ref(""); // Variable for the display name
@@ -35,6 +37,7 @@ async function postTime() {
 </script>
 
 <template>
+  <Back />
   <div>
     <h2>Opret tider</h2>
     <form @submit.prevent="postTime">

@@ -1,11 +1,14 @@
 <script setup>
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+
+// Access the router for navigation
+const router = useRouter();
+
 import { db } from '../firebase';
 import { ref as dbRef, set } from 'firebase/database';
 
-import ChooseTrainer from '@/components/ChooseTrainer.vue';
-
-const currentView = ref('form');
+import ChooseTrainer from '@/views/ChooseTrainer.vue';
 
 const name = ref('');
 const email = ref('');
@@ -36,23 +39,17 @@ const submitForm = async () => {
         console.error('Error adding document:', error);
     }
 
-    currentView.value = 'trainer';
+    router.push("/choosetrainer");
 };
 
-// Function to sanitize the name for use as a Firebase key
-const allowedName = (name) => {
-    return name.replace(/[\.$#\[\]]/g, '_'); // Replace invalid characters
-};
 
 const skip = () => {
-    currentView.value = 'trainer';
-}
-
+    router.push("/choosetrainer");
+};
 </script>
 
-
 <template>
-    <div class="form-wrapper" v-if="currentView === 'form'">
+    <div class="form-wrapper">
         <div class="form">
             <label for="fullName">Fulde navn*</label>
             <input v-model="name" type="text" placeholder="Fx Anders Andersen" id="fullName">
@@ -81,7 +78,6 @@ const skip = () => {
         <p v-if="successMessage">{{ successMessage }}</p>
         <p id="error-color" v-if="errorMessage">{{ errorMessage }}</p>
     </div>
-    <ChooseTrainer v-if="currentView === 'trainer'" />
 </template>
 
 <style scoped>

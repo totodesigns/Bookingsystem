@@ -2,7 +2,10 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Member from '../views/Member.vue'
 import Trainer from '../views/Trainer.vue'
-import TrainerLoggedIn from '../components/LoggedIn.vue'
+import ChooseTrainer from '../views/ChooseTrainer.vue'
+import ChooseOption from '../views/ChooseOption.vue'
+import PostSession from '../views/PostSession.vue'
+import Sessions from '../views/Sessions.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -23,9 +26,24 @@ const router = createRouter({
       component: Trainer
     },
     {
-      path: '/trainer/LoggedIn',
-      name: 'trainerLoggedIn',
-      component: TrainerLoggedIn,
+      path: '/choosetrainer',
+      name: 'choosetrainer',
+      component: ChooseTrainer
+    },
+    {
+      path: '/chooseoption',
+      name: 'chooseoption',
+      component: ChooseOption
+    },
+    {
+      path: '/postsession',
+      name: 'PostSession',
+      component: PostSession,
+    },
+    {
+      path: '/sessions',
+      name: 'sessions',
+      component: Sessions,
     },
 
   ]

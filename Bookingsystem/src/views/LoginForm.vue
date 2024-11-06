@@ -23,11 +23,16 @@ async function login() {
       password.value,
     );
 // Redirect to the loggedin on success, path made in index.js
-    router.push("/trainer/LoggedIn"); 
+    router.push("/chooseoption"); 
   } catch (err) {
     error.value = "Something went wrong! :(";
-  }
+  };
+};
+
+const skip = () => {
+  router.push("/chooseoption");
 }
+
 </script>
 
 <template>
@@ -39,5 +44,6 @@ async function login() {
       <button type="submit">Login</button>
       <p v-if="error">{{ error }}</p>
     </form>
+    <button @click="skip" type="button">Skip</button>
   </div>
 </template>

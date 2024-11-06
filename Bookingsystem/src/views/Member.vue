@@ -1,5 +1,5 @@
 <script setup>
-    import MemberForm from '@/components/MemberForm.vue';
+    import MemberForm from '@/views/MemberForm.vue';
     import Back from '@/components/Back.vue';
 
 </script>
