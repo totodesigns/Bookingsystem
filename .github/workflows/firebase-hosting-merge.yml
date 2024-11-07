@@ -28,7 +28,7 @@ jobs:
         run: |
           echo "Current directory before cd:"
           pwd
-          cd Bookingsystem/Bookingsystem  # Navigate to the correct subdirectory
+          cd Bookingsystem  # Correct the cd path
           echo "Current directory after cd:"
           pwd
           ls -al
