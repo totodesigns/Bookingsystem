@@ -1,4 +1,10 @@
 <script setup>
+    import { defineProps } from 'vue';
+
+    // Define the props that ChooseTrainer will receive
+    const props = defineProps({
+        fullName: String,
+    });
 </script>
 
 <template>
