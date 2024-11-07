@@ -13,31 +13,30 @@ jobs:
       # Step 1: Checkout the repository
       - uses: actions/checkout@v4
 
-      # Step 2: List the full directory structure recursively (for debugging)
-      - name: List directory structure recursively
+      # Step 2: Verify the directory structure
+      - name: Verify directory structure and package.json location
         run: |
           echo "Current working directory:"
           pwd
-          echo "Directory contents:"
+          echo "Listing all files in the repository:"
           ls -R
 
-      # Step 3: Change directory to the correct folder containing package.json
-      - name: Change directory to the folder containing package.json
+      # Step 3: Install dependencies and build the project
+      - name: Install dependencies and build
         run: |
-          # Check current working directory
-          cd Bookingsystem/Bookingsystem  # Try this again
-          echo "Current working directory after cd:"
-          pwd
-          ls -al
-
-      # Step 4: Install dependencies and build the project
-      - run: |
+          # Go into the correct directory before running npm commands
           cd Bookingsystem/Bookingsystem
+          echo "Current working directory (after cd):"
+          pwd
+          echo "Listing contents after cd:"
+          ls -al
+          # Install dependencies and build
           npm ci
           npm run build
 
-      # Step 5: Deploy to Firebase Hosting
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+      # Step 4: Deploy to Firebase Hosting
+      - name: Deploy to Firebase
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_BOOKINGSYSTEM_757C2 }}
