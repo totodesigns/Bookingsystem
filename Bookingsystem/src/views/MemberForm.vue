@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import { db } from '../firebase';
-import { ref as dbRef, push, set } from 'firebase/database';
+import { ref as dbRef, set } from 'firebase/database';
 
 import ChooseTrainer from '@/views/ChooseTrainer.vue';
 
@@ -80,7 +80,12 @@ let skip = () => {
         <button type="button" @click="skip">Skip</button>
     </div>
 
-    <ChooseTrainer v-if="showTrainerView" :fullName="name" />
+    <ChooseTrainer v-if="showTrainerView" 
+        :fullName="name" 
+        :contactPref="contactPref" 
+        :phone="phone" 
+        :email="email" 
+        :message="message" />
 </template>
 
 <style scoped>

@@ -32,9 +32,9 @@ async function register() {
 </script>
 
 <template>
-  <div>
-    <h2>Registrer</h2>
-    <form @submit.prevent="register">
+  <div class="form-wrapper">
+    <h2>Registrer ny træner</h2>
+    <form @submit.prevent="register" class="form">
       <input v-model="name" type="text" placeholder="Name" required />
       <input v-model="email" type="email" placeholder="Email" required />
       <input v-model="password" type="password" placeholder="Password" required />
@@ -43,3 +43,19 @@ async function register() {
     </form>
   </div>
 </template>
+
+<style scoped>
+    .form-wrapper {
+        margin: 20px;
+        width: 30vw;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+</style>

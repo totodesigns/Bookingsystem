@@ -24,7 +24,6 @@ async function postTime() {
     await set(trainerSessionsRef, {
       date: date.value,
       time: time.value,
-      isBooked: false,
       name: name.value,
     });
 

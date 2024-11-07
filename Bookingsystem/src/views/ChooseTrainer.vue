@@ -5,9 +5,12 @@
 
     import { defineProps } from 'vue';
 
-    // Define the props that ChooseTrainer will receive
     const props = defineProps({
         fullName: String,
+        contactPref: String,
+        phone: Number,
+        email: String,
+        message: String,
     });
 
     const wrapper = ref(true);
@@ -45,8 +48,20 @@
             </div>
         </div>
     </div>
-    <Allan v-if="AllanTime" :fullName="fullName" />
-    <Ole v-if="OleTime"/>
+    <Allan v-if="AllanTime" 
+        :fullName="name" 
+        :contactPref="contactPref" 
+        :phone="phone" 
+        :email="email" 
+        :message="message" />
+
+    <Ole v-if="OleTime" 
+        :fullName="name" 
+        :contactPref="contactPref" 
+        :phone="phone" 
+        :email="email" 
+        :message="message" />
+
 </template>
 
 <style scoped>
