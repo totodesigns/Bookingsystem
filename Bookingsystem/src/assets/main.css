@@ -1,7 +1,7 @@
 body {
     min-height: 100vh;
     color: var(--color-text);
-    background: var(--color-background);
+    background: #efefef;
     transition:
       color 0.5s,
       background-color 0.5s;
@@ -24,3 +24,23 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+
+button {
+  width: 30vw;
+  height: 3lh;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+input {
+  padding: 10px;
+}
+
+textarea {
+  padding: 10px;
+}
+
+select {
+  padding: 10px;
+}
+

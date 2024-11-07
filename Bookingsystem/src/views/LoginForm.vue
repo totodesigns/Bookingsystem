@@ -41,9 +41,9 @@ const skip = () => {
 </script>
 
 <template>
-  <div>
-    <h2>Login</h2>
-    <form @submit.prevent="login">
+  <div class="form-wrapper">
+    <h2>Login som træner</h2>
+    <form @submit.prevent="login" class="form">
       <input v-model="email" type="email" placeholder="Email" required />
       <input v-model="password" type="password" placeholder="Password" required />
       <button type="submit">Login</button>
@@ -52,3 +52,19 @@ const skip = () => {
     <button @click="skip" type="button">Skip</button>
   </div>
 </template>
+
+<style scoped>
+    .form-wrapper {
+        margin: 20px;
+        width: 30vw;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+</style>

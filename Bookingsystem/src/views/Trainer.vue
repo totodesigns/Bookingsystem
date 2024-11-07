@@ -8,5 +8,8 @@
 <template>
     <Back />
     <LoginForm />
+    <br>
+    <br>
+    <br>
     <RegistrationForm/>
 </template>

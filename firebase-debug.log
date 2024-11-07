@@ -1,0 +1,46 @@
+[debug] [2024-11-07T13:55:43.530Z] ----------------------------------------------------------------------
+[debug] [2024-11-07T13:55:43.534Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Tonny\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2024-11-07T13:55:43.534Z] CLI Version:   13.24.1
+[debug] [2024-11-07T13:55:43.534Z] Platform:      win32
+[debug] [2024-11-07T13:55:43.534Z] Node Version:  v22.11.0
+[debug] [2024-11-07T13:55:43.535Z] Time:          Thu Nov 07 2024 14:55:43 GMT+0100 (Centraleuropæisk normaltid)
+[debug] [2024-11-07T13:55:43.535Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-11-07T13:55:43.545Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-11-07T13:55:43.545Z] > authorizing via signed-in user (nguyentonnyt@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\Tonny\Documents\GitHub\Bookingsystem
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2024-11-07T13:56:14.286Z] Checked if tokens are valid: true, expires at: 1730990149944
+[debug] [2024-11-07T13:56:14.286Z] Checked if tokens are valid: true, expires at: 1730990149944
+[debug] [2024-11-07T13:56:14.287Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=100
+[debug] [2024-11-07T13:56:14.866Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2024-11-07T13:56:14.866Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[info] i  Using project bookingsystem-757c2 (Bookingsystem) 
+[info] 
+=== Hosting Setup
+[debug] [2024-11-07T13:56:17.507Z] Checked if tokens are valid: true, expires at: 1730990149944
+[debug] [2024-11-07T13:56:17.507Z] Checked if tokens are valid: true, expires at: 1730990149944
+[debug] [2024-11-07T13:56:17.508Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/bookingsystem-757c2 [none]
+[debug] [2024-11-07T13:56:17.739Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/bookingsystem-757c2 200
+[debug] [2024-11-07T13:56:17.739Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/bookingsystem-757c2 {"projectId":"bookingsystem-757c2","projectNumber":"1067504687830","displayName":"Bookingsystem","name":"projects/bookingsystem-757c2","resources":{"hostingSite":"bookingsystem-757c2","realtimeDatabaseInstance":"bookingsystem-757c2-default-rtdb"},"state":"ACTIVE","etag":"1_bf577539-3adf-436a-bb9d-5af242ccc0d9"}
+[info] 
+[info] Your public directory is the folder (relative to your project directory) that
+[info] will contain Hosting assets to be uploaded with firebase deploy. If you
+[info] have a build process for your assets, use your build's output directory.
+[info] 
