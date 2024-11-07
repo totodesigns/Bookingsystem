@@ -24,13 +24,12 @@ jobs:
       # Step 3: Install dependencies and build the project
       - name: Install dependencies and build
         run: |
-          # Go into the correct directory before running npm commands
-          cd Bookingsystem/Bookingsystem
-          echo "Current working directory (after cd):"
+          echo "Current directory before install:"
           pwd
-          echo "Listing contents after cd:"
+          # List the files at the current directory (this should be the root of the repository)
           ls -al
-          # Install dependencies and build
+          echo "Installing dependencies"
+          # Install dependencies and build the project
           npm ci
           npm run build
 
