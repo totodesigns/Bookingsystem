@@ -9,10 +9,8 @@ const time = ref("");
 const message = ref("");
 const error = ref(""); 
 
-
 // async-await makes it so that it has to wait for push before being able to continue
 async function postTime() {
-  try {
     if (!date.value || !time.value || !name.value) {
       error.value = "Please fill all input fields";
       return;
@@ -27,16 +25,10 @@ async function postTime() {
       name: name.value,
     });
 
-    // Reset fields and show success message
     message.value = "Time posted!";
     date.value = "";
     time.value = "";
     error.value = ""; // Reset any previous error
-
-  } catch (err) {
-    console.error("Error posting time:", err);
-    error.value = "Something went wrong, please try again.";
-  }
 }
 
 </script>
@@ -51,6 +43,5 @@ async function postTime() {
       <input v-model="date" type="date" required />
       <button type="submit">Opret tid</button>
     </form>
-    <p v-if="message">{{ message }}</p>
   </div>
 </template>
