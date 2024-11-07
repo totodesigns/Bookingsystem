@@ -1,4 +1,5 @@
 <script setup>
+import Back from '@/components/Back.vue'
 import { useRouter } from 'vue-router';
 
 // Access the router for navigation
