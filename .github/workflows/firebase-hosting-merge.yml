@@ -24,14 +24,14 @@ jobs:
       # Step 3: Navigate to the correct directory containing package.json
       - name: Change directory to the folder containing package.json
         run: |
-          cd Bookingsystem/Bookingsystem
+          cd Bookingsystem/Bookingsystem/Bookingsystem
           echo "Current working directory after cd:"
           pwd  # Confirm we're in the correct directory
           ls -al  # Confirm package.json is present
 
       # Step 4: Install dependencies and build the project
       - run: |
-          cd Bookingsystem/Bookingsystem  # Ensure we're in the correct folder
+          cd Bookingsystem/Bookingsystem/Bookingsystem  # Ensure we're in the correct folder
           npm ci
           npm run build
 
