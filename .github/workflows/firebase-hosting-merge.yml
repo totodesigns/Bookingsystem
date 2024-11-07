@@ -21,8 +21,8 @@ jobs:
           echo "Listing all files in the repository:"
           ls -R
 
-      # Step 3: Change to the correct directory where package.json is located
-      - name: Change to correct directory and install dependencies
+      # Step 3: Install dependencies
+      - name: Install dependencies and build
         run: |
           cd Bookingsystem/Bookingsystem  # Navigate to the correct subdirectory
           echo "Current directory after cd:"
@@ -32,7 +32,7 @@ jobs:
           npm ci
           npm run build
 
-      # Step 4: Deploy to Firebase Hosting
+      # Step 4: Deploy to Firebase
       - name: Deploy to Firebase
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
