@@ -3,6 +3,13 @@
     import Allan from '@/components/Trainers/Allan.vue';
     import Ole from '@/components/Trainers/Ole.vue';
 
+    import { defineProps } from 'vue';
+
+    // Define the props that ChooseTrainer will receive
+    const props = defineProps({
+        fullName: String,
+    });
+
     const wrapper = ref(true);
 
     const showAllanBtn = ref(true);
@@ -25,7 +32,8 @@
 
 <template>
     <div class="screenWrapper" v-if="wrapper">
-        <h1> Vælg ønsket træner </h1>
+        <h1>Hej {{ fullName }}.</h1>
+        <h2>Vælg ønsket træner</h2>
         <div class="trainerCardWrapper">
             <div class="trainerCard">
                 <h3>Allan</h3>
@@ -37,7 +45,7 @@
             </div>
         </div>
     </div>
-    <Allan v-if="AllanTime" />
+    <Allan v-if="AllanTime" :fullName="fullName" />
     <Ole v-if="OleTime"/>
 </template>
 
