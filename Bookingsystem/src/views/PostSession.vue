@@ -9,6 +9,7 @@ const time = ref("");
 const message = ref("");
 const error = ref(""); 
 
+
 // async-await makes it so that it has to wait for push before being able to continue
 async function postTime() {
   try {
@@ -16,8 +17,10 @@ async function postTime() {
       error.value = "Please fill all input fields";
       return;
     }
+
     // Adds the info to Firebase DB under the specific trainer's sessions
-    const trainerSessionsRef = dbRef(db, `trainerInfo/${name.value.toLowerCase()}/sessions`);
+    const sessionKey = `${date.value}__${time.value}`;
+    const trainerSessionsRef = dbRef(db, `trainerInfo/${name.value.toLowerCase()}/sessions/${sessionKey}`);
     await set(trainerSessionsRef, {
       date: date.value,
       time: time.value,
