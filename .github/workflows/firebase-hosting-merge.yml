@@ -13,17 +13,18 @@ jobs:
       # Step 1: Checkout the repository
       - uses: actions/checkout@v4
 
-      # Step 2: Change to the correct directory
-      - name: Navigate to Bookingsystem
-        run: cd Bookingsystem
+      # Step 2: Change to the correct directory (Bookingsystem)
+      - name: Change directory to Bookingsystem
+        run: cd Bookingsystem && pwd && ls -al
 
       # Step 3: Install dependencies and build the app
       - name: Install dependencies and build
         run: |
+          cd Bookingsystem
           npm ci
           npm run build
 
-      # Step 4: Deploy to Firebase Hosting
+      # Step 4: Deploy to Firebase
       - name: Deploy to Firebase
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
