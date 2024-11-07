@@ -15,7 +15,7 @@ const props = defineProps({
         message: String,
     });
 
-const bookedSessionsRef = dbRef(db, `trainerInfo/toto/booked-sessions`);
+const bookedSessionsRef = dbRef(db, `trainerInfo/allan/booked-sessions`);
 const bookedSessions = ref([]);
 
 onValue(bookedSessionsRef, (snapshot) => {
@@ -43,7 +43,6 @@ onValue(bookedSessionsRef, (snapshot) => {
                 <p>Foretrækker at blive kontaktet på: {{ bookedSession.contactPref }} </p>  
                 <p>Telefonnummer: {{ bookedSession.phone }} </p>  
                 <p>Email: {{ bookedSession.email }} </p>  
-                <button>Vælg tid</button>
             </li>
         </ul>
     </div>

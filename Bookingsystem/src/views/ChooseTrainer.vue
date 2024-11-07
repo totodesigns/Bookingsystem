@@ -49,14 +49,14 @@
         </div>
     </div>
     <Allan v-if="AllanTime" 
-        :fullName="name" 
+        :fullName="fullName" 
         :contactPref="contactPref" 
         :phone="phone" 
         :email="email" 
         :message="message" />
 
     <Ole v-if="OleTime" 
-        :fullName="name" 
+        :fullName="fullName" 
         :contactPref="contactPref" 
         :phone="phone" 
         :email="email" 

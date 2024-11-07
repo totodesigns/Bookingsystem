@@ -40,7 +40,6 @@ if (!name.value || !email.value || !phone.value) {
         // Skift væk fra form
         showTrainerView.value = true;
     } 
-
 };
 
 let skip = () => {
