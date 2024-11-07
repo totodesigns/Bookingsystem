@@ -13,25 +13,26 @@ jobs:
       # Step 1: Checkout the repository
       - uses: actions/checkout@v4
 
-      # Step 2: Check the directory structure (for debugging)
-      - name: List directory contents
+      # Step 2: List the full directory structure recursively (for debugging)
+      - name: List directory structure recursively
         run: |
           echo "Current working directory:"
           pwd
           echo "Directory contents:"
-          ls -al
+          ls -R
 
-      # Step 3: Navigate to the correct directory containing package.json
+      # Step 3: Change directory to the correct folder containing package.json
       - name: Change directory to the folder containing package.json
         run: |
-          cd Bookingsystem/Bookingsystem/Bookingsystem
+          # Check current working directory
+          cd Bookingsystem/Bookingsystem  # Try this again
           echo "Current working directory after cd:"
-          pwd  # Confirm we're in the correct directory
-          ls -al  # Confirm package.json is present
+          pwd
+          ls -al
 
       # Step 4: Install dependencies and build the project
       - run: |
-          cd Bookingsystem/Bookingsystem/Bookingsystem  # Ensure we're in the correct folder
+          cd Bookingsystem/Bookingsystem
           npm ci
           npm run build
 
