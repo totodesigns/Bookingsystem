@@ -21,15 +21,14 @@ jobs:
           echo "Listing all files in the repository:"
           ls -R
 
-      # Step 3: Install dependencies and build the project
-      - name: Install dependencies and build
+      # Step 3: Change to the correct directory where package.json is located
+      - name: Change to correct directory and install dependencies
         run: |
-          echo "Current directory before install:"
+          cd Bookingsystem/Bookingsystem  # Navigate to the correct subdirectory
+          echo "Current directory after cd:"
           pwd
-          # List the files at the current directory (this should be the root of the repository)
           ls -al
           echo "Installing dependencies"
-          # Install dependencies and build the project
           npm ci
           npm run build
 
