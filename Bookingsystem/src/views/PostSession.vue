@@ -1,39 +1,42 @@
 <script setup>
 import { ref } from "vue";
-import { db } from "../firebase"; // Realtime databse setup
-import { push, ref as dbRef } from "firebase/database";
-
+import { db } from "../firebase";
+import { set, ref as dbRef } from "firebase/database";
 import Back from '@/components/Back.vue';
-
+const name = ref("");
 const date = ref("");
 const time = ref("");
-const creatorName = ref(""); // Variable for the display name
 const message = ref("");
+const error = ref(""); 
 
-// Reference to firebase db
-const appointmentsRef = dbRef(db, "trainerInfo/sessions");
-
-// async-await makes it so that it has to wait for addDoc before beign able to continue
+// async-await makes it so that it has to wait for push before being able to continue
 async function postTime() {
   try {
-    // Adds the info to firebase db
-    await push(appointmentsRef, {
+    if (!date.value || !time.value || !name.value) {
+      error.value = "Please fill all input fields";
+      return;
+    }
+    // Adds the info to Firebase DB under the specific trainer's sessions
+    const trainerSessionsRef = dbRef(db, `trainerInfo/${name.value.toLowerCase()}/sessions`);
+    await set(trainerSessionsRef, {
       date: date.value,
       time: time.value,
-      isBooked: false, // run with not booked
-      createdBy: creatorName.value || "Ingen Person Fundet",
-    }); 
-    //Reset fields
+      isBooked: false,
+      name: name.value,
+    });
+
+    // Reset fields and show success message
     message.value = "Time posted!";
     date.value = "";
     time.value = "";
-    creatorName.value = "";
-    //Error handling
-  } catch (error) {
-    console.error("Error posting time:", error);
-    message.value = "Noget gik galt, prøv igen";
+    error.value = ""; // Reset any previous error
+
+  } catch (err) {
+    console.error("Error posting time:", err);
+    error.value = "Something went wrong, please try again.";
   }
 }
+
 </script>
 
 <template>
@@ -41,14 +44,11 @@ async function postTime() {
   <div>
     <h2>Opret tider</h2>
     <form @submit.prevent="postTime">
-      <input v-model="date" type="date" required />
+      <input v-model="name" type="text" placeholder="Name" required />
       <input v-model="time" type="time" required />
-      <input v-model="creatorName" type="text" placeholder="Angiv navn..." required/>
+      <input v-model="date" type="date" required />
       <button type="submit">Opret tid</button>
     </form>
     <p v-if="message">{{ message }}</p>
   </div>
 </template>
-
-<style scoped>
- </style>
