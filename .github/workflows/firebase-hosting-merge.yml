@@ -13,30 +13,14 @@ jobs:
       # Step 1: Checkout the repository
       - uses: actions/checkout@v4
 
-      # Step 2: Verify the directory structure and package.json location
-      - name: Verify directory structure and package.json location
-        run: |
-          echo "Current working directory:"
-          pwd
-          echo "Listing all files in the repository:"
-          ls -R
-          echo "Listing files in the root directory:"
-          ls -al
-
-      # Step 3: Install dependencies
+      # Step 2: Install dependencies and build
       - name: Install dependencies and build
         run: |
-          echo "Current directory before cd:"
-          pwd
           cd Bookingsystem  # Correct the cd path
-          echo "Current directory after cd:"
-          pwd
-          ls -al
-          echo "Installing dependencies"
           npm ci
           npm run build
 
-      # Step 4: Deploy to Firebase
+      # Step 3: Deploy to Firebase, specify entryPoint to firebase.json location
       - name: Deploy to Firebase
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
@@ -44,3 +28,4 @@ jobs:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_BOOKINGSYSTEM_757C2 }}
           channelId: live
           projectId: bookingsystem-757c2
+          entryPoint: 'Bookingsystem/firebase.json'  # Specify the correct path to firebase.json
