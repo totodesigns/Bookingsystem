@@ -13,17 +13,21 @@ jobs:
       # Step 1: Checkout the repository
       - uses: actions/checkout@v4
 
-      # Step 2: Verify the directory structure
+      # Step 2: Verify the directory structure and package.json location
       - name: Verify directory structure and package.json location
         run: |
           echo "Current working directory:"
           pwd
           echo "Listing all files in the repository:"
           ls -R
+          echo "Listing files in the root directory:"
+          ls -al
 
       # Step 3: Install dependencies
       - name: Install dependencies and build
         run: |
+          echo "Current directory before cd:"
+          pwd
           cd Bookingsystem/Bookingsystem  # Navigate to the correct subdirectory
           echo "Current directory after cd:"
           pwd
