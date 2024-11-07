@@ -13,31 +13,29 @@ jobs:
       # Step 1: Checkout the repository
       - uses: actions/checkout@v4
 
-      # Step 2: Check the directory structure
+      # Step 2: Check the directory structure (for debugging)
       - name: List directory contents
         run: |
           echo "Current working directory:"
-          pwd  # Prints the current directory
+          pwd
           echo "Directory contents:"
-          ls -al  # Lists files in the current directory
+          ls -al
 
-      # Step 3: Navigate to the directory containing package.json
-      - name: Change directory to the correct folder
+      # Step 3: Navigate to the correct directory containing package.json
+      - name: Change directory to the folder containing package.json
         run: |
-          cd Bookingsystem/Bookingsystem  # Try to change directory to the correct path
+          cd Bookingsystem/Bookingsystem
+          echo "Current working directory after cd:"
+          pwd  # Confirm we're in the correct directory
+          ls -al  # Confirm package.json is present
 
-      # Step 4: Verify that package.json exists
-      - name: Check for package.json
-        run: |
-          ls -al  # List files to ensure package.json is found
-
-      # Step 5: Install dependencies and build the project
+      # Step 4: Install dependencies and build the project
       - run: |
-          cd Bookingsystem/Bookingsystem  # Ensure we're in the right directory
+          cd Bookingsystem/Bookingsystem  # Ensure we're in the correct folder
           npm ci
           npm run build
 
-      # Step 6: Deploy to Firebase Hosting
+      # Step 5: Deploy to Firebase Hosting
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
