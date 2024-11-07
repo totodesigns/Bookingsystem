@@ -24,7 +24,7 @@ jobs:
           npm ci
           npm run build
 
-      # Step 4: Deploy to Firebase
+      # Step 4: Deploy to Firebase with the correct entryPoint for firebase.json
       - name: Deploy to Firebase
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
@@ -32,3 +32,4 @@ jobs:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_BOOKINGSYSTEM_757C2 }}
           channelId: live
           projectId: bookingsystem-757c2
+          entryPoint: 'Bookingsystem/firebase.json'  # Specify the correct path to firebase.json
