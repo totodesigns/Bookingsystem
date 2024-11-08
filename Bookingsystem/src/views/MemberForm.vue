@@ -19,7 +19,7 @@ const submitForm = () => {
 if (!name.value || !email.value || !phone.value) {
     errorMessage.value = 'Please fill in all required fields.';
     return;
-    
+
     } else {
 
         // Dato for signup!
@@ -28,7 +28,7 @@ if (!name.value || !email.value || !phone.value) {
         let month = signInDate.getMonth();
         let day = signInDate.getDate();
 
-        // Send the new unique userName to the database
+        // Send ny bruger til database
         set(dbRef(db, 'Medlemmere/' + name.value), {
             Email: email.value,
             Phone: phone.value,
