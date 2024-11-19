@@ -2,8 +2,13 @@
 import { ref } from 'vue';
 import { db } from '@/firebase';
 import { ref as dbRef, onValue, set, remove } from 'firebase/database';
-
 import { defineProps } from 'vue';
+import ChooseTrainer from '@/views/ChooseTrainer.vue';
+
+const showTrainerView = ref(false);
+let prev = () => {
+    showTrainerView.value = true;
+};
 
 const props = defineProps({
         fullName: String,
@@ -15,7 +20,6 @@ const props = defineProps({
 
 // "sessions" er et tomt array, der holder alle sessions fra db2.
 const sessions = ref([]);
-
 const sessionsRef = dbRef(db, `trainerInfo/allan/sessions`)
 
 onValue(sessionsRef, (snapshot) => {
@@ -26,9 +30,16 @@ onValue(sessionsRef, (snapshot) => {
     } 
 })
 
+const selectedSession = ref(null);
 // Function to handle session selection and update Firebase
 const selectSession = (sessionId) => {
+    selectedSession.value = sessionId;
+};
 
+const submitSession = () => {
+    if (!selectedSession.value) return;
+
+    const sessionId = selectedSession.value;
     const sessionRef = dbRef(db, `trainerInfo/allan/sessions/${sessionId}`);
   
     // Find selected session
@@ -52,8 +63,8 @@ const selectSession = (sessionId) => {
 </script>
 
 <template>
-    <h1>Allans Kalender</h1>
-    <div class="screenWrapper">
+    <h1 v-if="!showTrainerView">Allans Kalender</h1>
+    <div v-if="!showTrainerView" class="screenWrapper">
         <h2> Hej {{ fullName }}. Vælg ønsket tid </h2>
         <ul class="trainerCardWrapper">
             <li v-for="(session, id) in sessions" :key="id" class="trainerCard">
@@ -62,7 +73,12 @@ const selectSession = (sessionId) => {
                 <button @click="selectSession(id)">Vælg tid</button>
             </li>
         </ul>
+        <div>
+            <button @click="prev">Tilbage til trænere</button>
+            <button :disabled="!selectedSession"@click="submitSession">Fortsæt</button>
+        </div>
     </div>
+    <ChooseTrainer v-if="showTrainerView"/>
 </template>
 
 <style scoped>
@@ -79,12 +95,14 @@ const selectSession = (sessionId) => {
         margin: 20px;
         display: flex;
         flex-direction: column;
+        flex-wrap: wrap;
         gap: 20px;
     }
 
     .trainerCardWrapper {
         display: flex;
         gap: 12px;
+        flex-wrap: wrap;
     }
 
     .trainerCard {

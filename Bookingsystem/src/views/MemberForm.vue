@@ -2,14 +2,16 @@
 import { ref } from 'vue';
 import { db } from '../firebase';
 import { ref as dbRef, set } from 'firebase/database';
-
 import ChooseTrainer from '@/views/ChooseTrainer.vue';
+
+// export { formState, saveSignupData };
 
 const name = ref('');
 const email = ref('');
 const phone = ref('');
 const message = ref(null);
 const contactPref = ref('call');
+
 const errorMessage = ref('');
 const showTrainerView = ref(false);
 
@@ -39,7 +41,35 @@ if (!name.value || !email.value || !phone.value) {
 
         // Skift væk fra form
         showTrainerView.value = true;
-    } 
+// ____________________________________________________ TEST
+
+        const formState = ref({
+          name: '',
+          email: '',
+          phone: '',
+          message: '',
+          contactPref: '',
+          signedDate: '',
+        });
+
+      function saveSignupData (name, email, phone, message, contactPref) {
+        // Capture current date
+        const signInDate = new Date();
+        const year = signInDate.getFullYear();
+        const month = String(signInDate.getMonth() + 1).padStart(2, '0');
+        const day = String(signInDate.getDate()).padStart(2, '0');
+
+        // Update local state
+        formState.value = {
+          name,
+          email,
+          phone,
+          message,
+          contactPref,
+          signedDate: `${day}-${month}-${year}`,
+        };
+      }
+  }
 };
 
 let skip = () => {
@@ -73,10 +103,12 @@ let skip = () => {
                 <option value="email">På email</option>
             </select>
         </div>
-        <button type="button" @click="submitForm">Opret medlem</button>
+        <button type="button" @click="submitForm">Fortsæt</button>
         <p id="error-color" v-if="errorMessage">{{ errorMessage }}</p>
 
         <button type="button" @click="skip">Skip</button>
+        
+        <button @click="saveSignupData(name, email, phone, message, contactPref)">Continue</button>
     </div>
 
     <ChooseTrainer v-if="showTrainerView" 

@@ -21,7 +21,7 @@ const props = defineProps({
 // "sessions" er et tomt array, der holder alle sessions fra db2.
 const sessions = ref([]);
 
-const sessionsRef = dbRef(db, `trainerInfo/ole/sessions`)
+const sessionsRef = dbRef(db, `trainerInfo/kristian/sessions`)
 
 onValue(sessionsRef, (snapshot) => {
     if (snapshot.exists()) {
@@ -34,7 +34,7 @@ onValue(sessionsRef, (snapshot) => {
 // Function to handle session selection and update Firebase
 const selectSession = (sessionId) => {
 
-    const sessionRef = dbRef(db, `trainerInfo/ole/sessions/${sessionId}`);
+    const sessionRef = dbRef(db, `trainerInfo/kristian/sessions/${sessionId}`);
   
     // Find selected session
     const selectedSession = sessions.value[sessionId]; // Access directly by ID
@@ -46,7 +46,7 @@ const selectSession = (sessionId) => {
         selectedSession.message = props.message;
 
         // Smid ny data ind i ny value under træneren
-        const sessionBookedRef = dbRef(db, `trainerInfo/ole/booked-sessions/${sessionId}`)
+        const sessionBookedRef = dbRef(db, `trainerInfo/kristian/booked-sessions/${sessionId}`)
         set(sessionBookedRef, selectedSession);
 
         // Slet det samme data fra "sessions", der så fjerner det fra display.
@@ -58,7 +58,7 @@ const selectSession = (sessionId) => {
 </script>
 
 <template>
-    <h1 v-if="!showTrainerView">Oles Kalender</h1>
+    <h1 v-if="!showTrainerView">Kristians Kalender</h1>
     <div v-if="!showTrainerView" class="screenWrapper">
         <h2> Hej {{ fullName }}. Vælg ønsket tid </h2>
         <ul class="trainerCardWrapper">

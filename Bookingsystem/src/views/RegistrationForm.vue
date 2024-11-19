@@ -7,7 +7,6 @@ const name = ref("");
 const email = ref("");
 const password = ref("");
 
-
 async function register() {
     const usersRef = dbRef(db, "trainerInfo/" + name.value.toLowerCase()); //says the data vill go to trainerinfo in the db
 

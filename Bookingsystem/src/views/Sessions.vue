@@ -15,12 +15,46 @@ const props = defineProps({
         message: String,
     });
 
-const bookedSessionsRef = dbRef(db, `trainerInfo/allan/booked-sessions`);
+const bookedSessionsRef1 = dbRef(db, `trainerInfo/allan/booked-sessions`);
+const bookedSessionsRef2 = dbRef(db, `trainerInfo/ole/booked-sessions`);
+const bookedSessionsRef3 = dbRef(db, `trainerInfo/emilie/booked-sessions`);
+const bookedSessionsRef4 = dbRef(db, `trainerInfo/kristian/booked-sessions`);
+const bookedSessionsRef5 = dbRef(db, `trainerInfo/marete/booked-sessions`);
+const bookedSessionsRef6 = dbRef(db, `trainerInfo/mads/booked-sessions`);
 const bookedSessions = ref([]);
 
-onValue(bookedSessionsRef, (snapshot) => {
+onValue(bookedSessionsRef1, (snapshot) => {
     if (snapshot.exists()) {
-
+        // Hvis der findes et objekt i databasen (snapshot), så smid det i sessions-array.
+        bookedSessions.value = snapshot.val();
+    } 
+})
+onValue(bookedSessionsRef2, (snapshot) => {
+    if (snapshot.exists()) {
+        // Hvis der findes et objekt i databasen (snapshot), så smid det i sessions-array.
+        bookedSessions.value = snapshot.val();
+    } 
+})
+onValue(bookedSessionsRef3, (snapshot) => {
+    if (snapshot.exists()) {
+        // Hvis der findes et objekt i databasen (snapshot), så smid det i sessions-array.
+        bookedSessions.value = snapshot.val();
+    } 
+})
+onValue(bookedSessionsRef4, (snapshot) => {
+    if (snapshot.exists()) {
+        // Hvis der findes et objekt i databasen (snapshot), så smid det i sessions-array.
+        bookedSessions.value = snapshot.val();
+    } 
+})
+onValue(bookedSessionsRef5, (snapshot) => {
+    if (snapshot.exists()) {
+        // Hvis der findes et objekt i databasen (snapshot), så smid det i sessions-array.
+        bookedSessions.value = snapshot.val();
+    } 
+})
+onValue(bookedSessionsRef6, (snapshot) => {
+    if (snapshot.exists()) {
         // Hvis der findes et objekt i databasen (snapshot), så smid det i sessions-array.
         bookedSessions.value = snapshot.val();
     } 
