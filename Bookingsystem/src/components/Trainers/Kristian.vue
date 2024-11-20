@@ -1,63 +1,77 @@
 <script setup>
 import { ref } from 'vue';
 import { db } from '@/firebase';
-import { ref as dbRef, onValue, set, remove } from 'firebase/database';
-import ChooseTrainer from '@/views/ChooseTrainer.vue';
+import { ref as dbRef, onValue } from 'firebase/database';
 import { defineProps } from 'vue';
+import ChooseTrainer from '@/views/ChooseTrainer.vue';
+import Confirmation from '@/views/Confirmation.vue';
 
+// Routing
+const showConfirmationView = ref(false);
+let confirm = () => {
+  showConfirmationView.value = true;
+}
 const showTrainerView = ref(false);
 let prev = () => {
     showTrainerView.value = true;
 };
-
+// Props
 const props = defineProps({
-        fullName: String,
-        contactPref: String,
-        phone: Number,
-        email: String,
-        message: String,
-    });
+    fullName: String,
+    contactPref: String,
+    phone: Number,
+    email: String,
+    message: String,
+});
 
 // "sessions" er et tomt array, der holder alle sessions fra db2.
 const sessions = ref([]);
-
-const sessionsRef = dbRef(db, `trainerInfo/kristian/sessions`)
+const sessionsRef = dbRef(db, `trainerInfo/kristian/sessions`);
 
 onValue(sessionsRef, (snapshot) => {
     if (snapshot.exists()) {
-
         // Hvis der findes et objekt i databasen (snapshot), så smid det i sessions-array.
         sessions.value = snapshot.val();
-    } 
-})
+    }
+});
 
-// Function to handle session selection and update Firebase
+const selectedSession = ref(null);
+
+// Function to handle session selection
 const selectSession = (sessionId) => {
+    selectedSession.value = sessionId;
+};
 
-    const sessionRef = dbRef(db, `trainerInfo/kristian/sessions/${sessionId}`);
-  
-    // Find selected session
-    const selectedSession = sessions.value[sessionId]; // Access directly by ID
-    if (selectedSession) {
-        selectedSession.memberName = props.fullName;
-        selectedSession.contactPref = props.contactPref;
-        selectedSession.phone = props.phone;
-        selectedSession.email = props.email;
-        selectedSession.message = props.message;
+// Save selected session to local storage
+const submitSession = () => {
+    if (!selectedSession.value) return;
 
-        // Smid ny data ind i ny value under træneren
-        const sessionBookedRef = dbRef(db, `trainerInfo/kristian/booked-sessions/${sessionId}`)
-        set(sessionBookedRef, selectedSession);
+    const sessionId = selectedSession.value;
+    const sessionData = sessions.value[sessionId]; // Access session details by ID
 
-        // Slet det samme data fra "sessions", der så fjerner det fra display.
-        remove(sessionRef, selectedSession)
+    if (sessionData) {
+        const bookingData = {
+            sessionId,
+            sessionDetails: sessionData,
+            userDetails: {
+                fullName: props.fullName,
+                contactPref: props.contactPref,
+                phone: props.phone,
+                email: props.email,
+                message: props.message,
+            },
+        };
 
-    };
-}
-
+        // Save booking data to local storage
+        localStorage.setItem('selectedSession', JSON.stringify(bookingData));
+        console.log('Session data saved to local storage:', bookingData);
+    }
+    confirm();
+};
 </script>
 
 <template>
+  <div v-if="!showConfirmationView">
     <h1 v-if="!showTrainerView">Kristians Kalender</h1>
     <div v-if="!showTrainerView" class="screenWrapper">
         <h2> Hej {{ fullName }}. Vælg ønsket tid </h2>
@@ -70,37 +84,40 @@ const selectSession = (sessionId) => {
         </ul>
         <div>
             <button @click="prev">Tilbage til trænere</button>
-            <button :disabled="!selectedSession"@click="submitSession">Fortsæt</button>
+            <button :disabled="!selectedSession" @click="submitSession">Fortsæt</button>
         </div>
     </div>
+  </div>
     <ChooseTrainer v-if="showTrainerView"/>
+    <Confirmation v-if="showConfirmationView"/>
 </template>
 
 <style scoped>
+li {
+    list-style: none;
+}
 
-    li {
-        list-style: none;
-    }
+* {
+    box-sizing: border-box;
+}
 
-    * {
-        box-sizing: border-box;
-    }
+.screenWrapper {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 20px;
+}
 
-    .screenWrapper {
-        margin: 20px;
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-    }
+.trainerCardWrapper {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
 
-    .trainerCardWrapper {
-        display: flex;
-        gap: 12px;
-    }
-
-    .trainerCard {
-        padding: 16px;
-        border: 1px solid black;
-        width: fit-content;
-    }
+.trainerCard {
+    padding: 16px;
+    border: 1px solid black;
+    width: fit-content;
+}
 </style>

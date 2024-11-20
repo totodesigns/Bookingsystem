@@ -6,6 +6,7 @@ import { defineProps } from 'vue';
 import ChooseTrainer from '@/views/ChooseTrainer.vue';
 import Confirmation from '@/views/Confirmation.vue';
 
+// Routing
 const showConfirmationView = ref(false);
 let confirm = () => {
   showConfirmationView.value = true;
@@ -14,7 +15,7 @@ const showTrainerView = ref(false);
 let prev = () => {
     showTrainerView.value = true;
 };
-
+// Props
 const props = defineProps({
     fullName: String,
     contactPref: String,

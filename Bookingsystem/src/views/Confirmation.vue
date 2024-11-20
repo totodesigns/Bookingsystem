@@ -10,36 +10,39 @@ let confirm = () => {
   showThanksView.value = true;
 }
 
-
 const bookingData = JSON.parse(localStorage.getItem('selectedSession'));
 
 // Safely extract fields for display
-const sessionId = ref(bookingData?.sessionId || 'N/A');
+const sessionId = ref(bookingData?.sessionId);
 const sessionDetails = ref(bookingData?.sessionDetails || {});
 const userDetails = ref(bookingData?.userDetails || {});
 
 const completeSignup = async () => {
-  if (!bookingData.sessionId || !sessionDetails || !userDetails) {
+  if (!sessionId.value || !sessionDetails || !userDetails) {
     console.error("Incomplete booking data.");
     return;
   }
-
+  
   // Clean sessionDetails and userDetails to remove unwanted fields like `dep`
   const cleanedSessionDetails = { ...sessionDetails };
   if (cleanedSessionDetails.dep) delete cleanedSessionDetails.dep;
-
   const cleanedUserDetails = { ...userDetails };
   if (cleanedUserDetails.dep) delete cleanedUserDetails.dep;
-
   // Data to save
   const dataToSave = {
     sessionDetails: cleanedSessionDetails,
     userDetails: cleanedUserDetails,
   };
 
-  try {
-    const sessionRef = dbRef(db, `trainerInfo/allan/booked-sessions/${bookingData.sessionId}`);
+  try {    
+    // Remove the session from the available sessions list in Firebase using the sessionId
+    const sessionRefToDelete = dbRef(db, `trainerInfo/sessions/${sessionId.value}`);
+    await set(sessionRefToDelete, null);  // This deletes the session from the list
+
+    // Sets the session data to a new place in db (booked-sessions)
+    const sessionRef = dbRef(db, `trainerInfo/booked-sessions/${sessionId.value}`);
     await set(sessionRef, dataToSave);
+
 
     console.log("Signup data saved successfully!");
     alert("Signup complete!");
@@ -61,6 +64,8 @@ const completeSignup = async () => {
       <h2>Session Details</h2>
       <button> rediger</button>
     </div>
+    <p><strong>Session ID:</strong> {{ bookingData.sessionId || 'N/A' }}</p>
+
     <p><strong>Trainer:</strong> {{ sessionDetails.name || 'N/A' }}</p>
     <p><strong>Date:</strong> {{ sessionDetails.date || 'N/A' }}</p>
     <p><strong>Time:</strong> {{ sessionDetails.time || 'N/A' }}</p>

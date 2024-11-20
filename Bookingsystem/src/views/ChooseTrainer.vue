@@ -17,7 +17,7 @@
         message: String,
     });
     const wrapper = ref(true);
-    
+
     const AllanTime = ref(false);
     const OleTime = ref(false);
     const EmilieTime = ref(false);

@@ -24,7 +24,7 @@ let goToSessions = () => {
             <button @click="goToPostSession">Vælg</button>
         </div>
         <div class="trainerCard">
-            <h2>Se kommende sessioner</h2>
+            <h2>Se alle kommende sessioner</h2>
             <button @click="goToSessions">Vælg</button>
         </div>
     </div>
