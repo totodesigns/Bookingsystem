@@ -11,23 +11,23 @@ const contactPref = ref('call');
 const errorMessage = ref('');
 const showTrainerView = ref(false);
 
-const saveToLocalStorage = () => {
+const next = () => {
   if (!name.value || !email.value || !phone.value) {
     errorMessage.value = 'Please fill in all required fields.';
     return;
   }
-  // Save form data to localStorage
-  const formData = {
-    name: name.value,
-    email: email.value,
-    phone: phone.value,
-    message: message.value,
-    contactPref: contactPref.value,
-    signedDate: new Date().toISOString(),
-  };
+  // // Save form data to localStorage
+  // const formData = {
+  //   name: name.value,
+  //   email: email.value,
+  //   phone: phone.value,
+  //   message: message.value,
+  //   contactPref: contactPref.value,
+  //   signedDate: new Date().toISOString(),
+  // };
 
-  localStorage.setItem('signupFormData', JSON.stringify(formData));
-  console.log('Form data saved to localStorage:', formData);
+  // // localStorage.setItem('signupFormData', JSON.stringify(formData));
+  // // console.log('Form data saved to localStorage:', formData);
 
   // Navigate to the next view
   showTrainerView.value = true;
@@ -65,7 +65,7 @@ const skip = () => {
       </select>
     </div>
 
-    <button type="button" @click="saveToLocalStorage">Fortsæt</button>
+    <button type="button" @click="next">Fortsæt</button>
     <p id="error-color" v-if="errorMessage">{{ errorMessage }}</p>
 
     <button type="button" @click="skip">Skip</button>

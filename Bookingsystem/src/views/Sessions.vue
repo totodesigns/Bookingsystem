@@ -1,6 +1,5 @@
 <script setup>
 import Back from '@/components/Back.vue';
-
 import { ref } from 'vue';
 import { db } from '@/firebase';
 import { ref as dbRef, onValue } from 'firebase/database';

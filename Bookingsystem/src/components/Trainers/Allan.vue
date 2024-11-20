@@ -64,9 +64,6 @@ const submitSession = () => {
         // Save booking data to local storage
         localStorage.setItem('selectedSession', JSON.stringify(bookingData));
         console.log('Session data saved to local storage:', bookingData);
-
-        // Optional: Navigate to another view or update the UI
-        alert('Session saved locally for future use!');
     }
     confirm();
 };
