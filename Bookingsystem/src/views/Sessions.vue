@@ -1,77 +1,95 @@
 <script setup>
-import Back from '@/components/Back.vue';
-
 import { ref } from 'vue';
 import { db } from '@/firebase';
 import { ref as dbRef, onValue } from 'firebase/database';
-
-import { defineProps } from 'vue';
-
-const props = defineProps({
-        fullName: String,
-        contactPref: String,
-        phone: Number,
-        email: String,
-        message: String,
-    });
-
-const bookedSessionsRef = dbRef(db, `trainerInfo/allan/booked-sessions`);
+import Back from '@/components/Back.vue';
 const bookedSessions = ref([]);
 
-onValue(bookedSessionsRef, (snapshot) => {
+// Fetch booked sessions dynamically based on the unique keys (date__time)
+const fetchBookedSessions = () => {
+  const bookedSessionsRef = dbRef(db, 'trainerInfo/booked-sessions');
+  
+  onValue(bookedSessionsRef, (snapshot) => {
     if (snapshot.exists()) {
+      const data = snapshot.val();
+      const sessions = [];
 
-        // Hvis der findes et objekt i databasen (snapshot), så smid det i sessions-array.
-        bookedSessions.value = snapshot.val();
-    } 
-})
+      // Loop through each session key (dynamic key)
+      for (const sessionKey in data) {
+        const sessionData = data[sessionKey];
+        const sessionDetails = sessionData.sessionDetails || {};
+        const userDetails = sessionData.userDetails || {};
+
+        sessions.push({
+          fullName: userDetails._value.fullName,
+          date: sessionDetails._value.date,
+          time: sessionDetails._value.time,
+          message: userDetails._value.message,
+          contactPref: userDetails._value.contactPref,
+          phone: userDetails._value.phone,
+          email: userDetails._value.email,
+          name: sessionDetails._value.name,
+        });
+      }
+
+      bookedSessions.value = sessions;
+    }
+  });
+};
+
+// Call function to fetch data on component creation
+fetchBookedSessions();
 
 </script>
 
-<template>
-    <Back />
-    <div class="screenWrapper">
-        <h1> Se dine kommende tider </h1>
-        <ul class="trainerCardWrapper">
-            <li v-for="bookedSession in bookedSessions" class="trainerCard">
-                <p><b>Medlem: {{ bookedSession.memberName }} </b></p>
-                <p>Dato: {{ bookedSession.date }} </p>
-                <p>Tid: {{ bookedSession.time }} </p>
-                <p>Besked til træner: {{ bookedSession.message }} </p>
-                <br>
-                <p><b>Kontaktoplysninger:</b></p>
-                <p>Foretrækker at blive kontaktet på: {{ bookedSession.contactPref }} </p>  
-                <p>Telefonnummer: {{ bookedSession.phone }} </p>  
-                <p>Email: {{ bookedSession.email }} </p>  
-            </li>
-        </ul>
-    </div>
+<template>  
+<back/>
+  <div class="screenWrapper">
+    <h1> Se alle kommende tider </h1>
+    
+    <!-- Loop through and display all booked sessions -->
+    <ul class="trainerCardWrapper">
+      <li v-for="(session, index) in bookedSessions" :key="index" class="trainerCard">
+        <p><b>Medlem: {{ session.fullName }} </b></p>
+        <p>Træner: {{ session.name }}</p>
+        <p>Dato: {{ session.date }} </p>
+        <p>Tid: {{ session.time }} </p>
+        <p>Besked til træner: {{ session.message }} </p>
+        <br>
+        <p><b>Kontaktoplysninger:</b></p>
+        <p>Foretrækker at blive kontaktet på: {{ session.contactPref }} </p>  
+        <p>Telefonnummer: {{ session.phone }} </p>  
+        <p>Email: {{ session.email }} </p>  
+      </li>
+    </ul>
+  </div>
+
 </template>
 
 <style scoped>
-    li {
-            list-style: none;
-        }
+  * {
+    box-sizing: border-box;
+  }
 
-        * {
-            box-sizing: border-box;
-        }
+  li {
+    list-style: none;
+  }
 
-        .screenWrapper {
-            margin: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .trainerCardWrapper {
-            display: flex;
-            gap: 12px;
-        }
-
-        .trainerCard {
-            padding: 16px;
-            border: 1px solid black;
-            width: fit-content;
-        }
+  .screenWrapper {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .trainerCardWrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .trainerCard {
+    padding: 16px;
+    border: 1px solid black;
+    width: fit-content;
+  }
 </style>

@@ -26,7 +26,7 @@ const props = defineProps({
 
 // "sessions" er et tomt array, der holder alle sessions fra db2.
 const sessions = ref([]);
-const sessionsRef = dbRef(db, `trainerInfo/allan/sessions`);
+const sessionsRef = dbRef(db, `trainerInfo/mads/sessions`);
 
 onValue(sessionsRef, (snapshot) => {
     if (snapshot.exists()) {
@@ -72,7 +72,7 @@ const submitSession = () => {
 
 <template>
   <div v-if="!showConfirmationView">
-    <h1 v-if="!showTrainerView">Allans Kalender</h1>
+    <h1 v-if="!showTrainerView">Mads' Kalender</h1>
     <div v-if="!showTrainerView" class="screenWrapper">
         <h2> Hej {{ fullName }}. Vælg ønsket tid </h2>
         <ul class="trainerCardWrapper">

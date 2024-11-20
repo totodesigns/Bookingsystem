@@ -4,9 +4,9 @@ import { useRouter } from "vue-router";
 import { db } from "../firebase";
 import { ref as dbRef, get } from "firebase/database";
 
+const router = useRouter();
 const email = ref("");
 const password = ref("");
-const router = useRouter();
 
 async function login() {
     const usersRef = dbRef(db, 'trainerInfo'); //pointing to the database > trainerinfo
@@ -16,6 +16,7 @@ async function login() {
 
 
       for (const userId in trainersinfo) { //userId is the names of the key value pairs, the object
+
         const user = trainersinfo[userId]; //user is the contents of userId, so like email and password
 
         if (user.email === email.value && user.password === password.value) { //checks if the email in database is the same as user input aswell as pw
