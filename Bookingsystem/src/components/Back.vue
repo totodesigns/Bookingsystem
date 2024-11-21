@@ -1,5 +1,5 @@
 <script setup>
 </script>
 <template>
-    <a href="/"><< Gå tilbage</a>
+    <a href="/" class="default-tertiary-btn">Gå tilbage</a>
 </template>

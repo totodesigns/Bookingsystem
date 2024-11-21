@@ -1,0 +1,58 @@
+@use "_colors.scss" as c;
+
+@mixin icon-btn {
+    display: flex;
+    gap: 8px;
+}
+
+.default-primary-btn {
+    padding: 16px 24px;
+    color: c.$neutral-1;
+    border: none;
+    border-radius: 8px;
+    background-color: c.$blue-6;
+    transition: 0.3s ease;
+    &:hover {
+        background-color: c.$blue-7;
+    }
+}
+
+.default-secondary-btn {
+    padding: 16px 24px;
+    border-radius: 8px;
+    border: 2px solid c.$blue-6;
+    &:hover {
+        background-color: c.$blue-7;
+        border: none;
+    }
+}
+
+.default-tertiary-btn {
+    display: inline-block;
+    position: relative;
+    text-decoration: none;
+    color: c.$neutral-10; // Initial text color
+    transition: color 0.3s ease; // Smooth color transition
+}
+
+/* Effect two: Underline - Right to Left */
+.default-tertiary-btn::after {
+    content: "";
+    position: absolute;
+    width: 20%;
+    height: 2px;
+    bottom: -1px;
+    right: 80%;
+    background-color: c.$neutral-10;
+    transition: width 0.3s ease, right 0.3s ease;
+}
+
+.default-tertiary-btn:hover {
+    color: c.$blue-6; // Change text color on hover
+}
+
+.default-tertiary-btn:hover::after {
+    background-color: c.$blue-6; // Change underline color
+    width: 100%;
+    right: 0;
+}
