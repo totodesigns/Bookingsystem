@@ -1,19 +1,25 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue'
-import Member from '../views/Member.vue'
-import Trainer from '../views/Trainer.vue'
-import ChooseTrainer from '../views/ChooseTrainer.vue'
-import ChooseOption from '../views/ChooseOption.vue'
-import PostSession from '../views/PostSession.vue'
-import Sessions from '../views/Sessions.vue'
+import Index from '../views/Index.vue'
+import BookStart from '../views/bookingflow/BookStart.vue'
+import Member from '../views/bookingflow/Member.vue'
+import Trainer from '../views/bookingflow/Trainer.vue'
+import ChooseTrainer from '../views/bookingflow/ChooseTrainer.vue'
+import ChooseOption from '../views/bookingflow/ChooseOption.vue'
+import PostSession from '../views/bookingflow/PostSession.vue'
+import Sessions from '../views/bookingflow/Sessions.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: Home
+      name: 'index',
+      component: Index
+    },
+    {
+      path: '/bookstart',
+      name: 'bookstart',
+      component: BookStart
     },
     {
       path: '/member',

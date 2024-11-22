@@ -34,29 +34,22 @@ const skip = () => {
 </script>
 
 <template>
-  <div class="form-wrapper">
-    <h2>Login som træner</h2>
-    <form @submit.prevent="login" class="form">
-      <input v-model="email" type="email" placeholder="Email" required />
-      <input v-model="password" type="password" placeholder="Password" required />
-      <button type="submit">Login</button>
+  <div class="flow-content">
+    <div class="flow-header">
+        <p class="t1">Log ind som træner</p>
+        <hr>
+    </div>
+    <form @submit.prevent="login" class="formular">
+      <div class="form">
+        <label>Email</label>
+        <input v-model="email" type="email" placeholder="Email" required class="form-style"/>
+      </div>
+      <div class="form">
+        <label>Password</label>
+        <input v-model="password" type="password" placeholder="Password" required class="form-style"/>
+      </div>
+      <button type="submit" class="default-primary-btn stretch">LOG IND</button>
+      <button type="button" @click="skip" class="default-secondary-btn stretch">SKIP</button>
     </form>
-    <button @click="skip" type="button">Skip</button>
   </div>
 </template>
-
-<style scoped>
-    .form-wrapper {
-        margin: 20px;
-        width: 30vw;
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-    }
-
-    .form {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-    }
-</style>

@@ -3,8 +3,8 @@ import { ref } from 'vue';
 import { db } from '@/firebase';
 import { ref as dbRef, onValue } from 'firebase/database';
 import { defineProps } from 'vue';
-import ChooseTrainer from '@/views/ChooseTrainer.vue';
-import Confirmation from '@/views/Confirmation.vue';
+import ChooseTrainer from '@/views/bookingflow/ChooseTrainer.vue';
+import Confirmation from '@/views/bookingflow/Confirmation.vue';
 
 // Routing
 const showConfirmationView = ref(false);

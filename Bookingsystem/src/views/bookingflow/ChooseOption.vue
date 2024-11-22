@@ -1,5 +1,5 @@
 <script setup>
-import Back from '@/components/Back.vue'
+import NavBar from '@/components/NavBar.vue'
 import { useRouter } from 'vue-router';
 
 // Access the router for navigation
@@ -16,7 +16,7 @@ let goToSessions = () => {
 </script>
 
 <template>
-    <Back />
+    <NavBar />
     <h1>Hvad vil du?</h1>
     <div class="trainerCardWrapper">
         <div class="trainerCard">

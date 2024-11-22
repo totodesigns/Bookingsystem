@@ -1,0 +1,30 @@
+@use "_colors.scss" as c;
+
+.chevron {
+    width: 24px;
+    height: 24px;
+    stroke: c.$blue-6;
+    stroke-width: 2px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: 0.3s ease;
+}
+
+.chevron-tertiary {
+    width: 24px;
+    height: 24px;
+    stroke: c.$neutral-6;
+    stroke-width: 2px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: 0.3s ease;
+}
+
+.cross {
+    width: 24px;
+    height: 24px;
+    fill: c.$blue-6;
+    stroke: c.$blue-6;
+    stroke-width: 1px;
+    transition: 0.3s ease;
+}
