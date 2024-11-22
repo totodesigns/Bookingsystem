@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import { db } from '../firebase';
+import { db } from '../../firebase';
 import { ref as dbRef, set } from 'firebase/database';
 
 //Routing stuff

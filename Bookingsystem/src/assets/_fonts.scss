@@ -26,32 +26,31 @@ p {
     font-size: 16px;
     line-height: 150%;
     font-weight: 400;
-
-    .t1 {
+}
+.t1 {
         font-size: 32px;
         font-weight: 500;
-    }
-    .t2 {
+}
+.t2 {
         font-size: 24px;
         font-weight: 500;
-    }
-    .t3 {
-        font-size: 20px;
-        line-height: 32px;
-        font-weight: 300;
-    }
-    .body-large {
-        font-size: 20;
-        line-height: 32px;
-    }
-    .caption {
-        font-size: 12px;
-        line-height: 20px;
-        font-weight: 300;
-    }
-    .body-bold {
-        font-weight: 700;
-    }
+}
+.t3 {
+    font-size: 20px;
+    line-height: 32px;
+    font-weight: 300;
+}
+.body-large {
+    font-size: 20px;
+    line-height: 32px;
+}
+.caption {
+    font-size: 12px;
+    line-height: 20px;
+    font-weight: 300;
+}
+.body-bold {
+    font-weight: 700;
 }
 
 body {

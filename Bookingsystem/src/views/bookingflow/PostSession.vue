@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue";
-import { db } from "../firebase";
+import { db } from "../../firebase";
 import { set, ref as dbRef } from "firebase/database";
 import Back from '@/components/Back.vue';
 const name = ref("");
