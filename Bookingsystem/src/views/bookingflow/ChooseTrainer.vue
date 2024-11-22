@@ -19,7 +19,6 @@
         message: String,
     });
     const wrapper = ref(true);
-
     const AllanTime = ref(false);
     const OleTime = ref(false);
     const EmilieTime = ref(false);
@@ -32,6 +31,21 @@
     let selectTrainer = (trainer) => {
     selectedTrainer.value = trainer;
     }
+
+    const trainerPopups = ref({
+      trainer1: false, 
+      trainer2: false, 
+      trainer3: false, 
+      trainer4: false, 
+      trainer5: false, 
+      trainer6: false,
+    });
+
+    const togglePopup = (trainer) => {
+      trainerPopups.value[trainer] = !trainerPopups.value[trainer];
+      return {popups, togglePopup,};
+    }
+
     const getTrainerClass = (trainer) => {
     return selectedTrainer.value === trainer ? 'clicked-radio-btn' : 'default-radio-btn';
 
@@ -72,9 +86,10 @@ let prev = () => {
                                 <div class="card-content">
                                     <div class="allanimg" :style="{ backgroundImage: `url(${allanAvatar})`}"></div>
                                     <p class="body-large body-bold">Allan</p>
-                                    <p class="card-bio">Allan er medstifter af Strong4life og har ...</p>
-                                </div>
-                                <button class="icon-tertiary-btn">LÆS OM ALLAN</button>
+                                    <p class="card-bio" v-if="!trainerPopups.trainer1">Allan er medstifter af Strong4life og har ...</p>
+                                </div> <p v-if="trainerPopups.trainer1"> hahahaha</p>
+                                <button class="icon-tertiary-btn" @click="togglePopup('trainer1')">LÆS OM ALLAN</button>
+                                
                             </div>
                             <button @click="selectTrainer('Allan')" :class="getTrainerClass('Allan')">
                                 Vælg træner
@@ -85,9 +100,9 @@ let prev = () => {
                                 <div class="card-content">
                                     <div class="avatar"></div>
                                     <p class="body-large body-bold">Ole</p>
-                                    <p class="card-bio">Ole er medstifter af Strong4life og er med til ...</p>
-                                </div>
-                                <button class="icon-tertiary-btn">LÆS OM OLE</button>
+                                    <p class="card-bio" v-if="!trainerPopups.trainer2">Ole er medstifter af Strong4life og er med til ...</p>
+                                </div><p v-if="trainerPopups.trainer2"> hahahaha</p>
+                                <button class="icon-tertiary-btn" @click="togglePopup('trainer2')">LÆS OM OLE</button>
                             </div>
                             <button @click="selectTrainer('Ole')" :class="getTrainerClass('Ole')">
                                 Vælg træner
@@ -98,9 +113,9 @@ let prev = () => {
                                 <div class="card-content">
                                     <div class="avatar"></div>
                                     <p class="body-large body-bold">Emilie</p>
-                                    <p class="card-bio">Emilie er personlig træner, og specialiserer sig i...</p>
-                                </div>
-                                <button class="icon-tertiary-btn">LÆS OM EMILIE</button>
+                                    <p class="card-bio" v-if="!trainerPopups.trainer3">Emilie er personlig træner, og specialiserer sig i...</p>
+                                </div><p v-if="trainerPopups.trainer3"> hahahaha</p>
+                                <button class="icon-tertiary-btn" @click="togglePopup('trainer3')">LÆS OM EMILIE</button>
                             </div>
                             <button @click="selectTrainer('Emilie')" :class="getTrainerClass('Emilie')">
                                 Vælg træner
@@ -111,9 +126,9 @@ let prev = () => {
                                 <div class="card-content">
                                     <div class="avatar"></div>
                                     <p class="body-large body-bold">Kristian</p>
-                                    <p class="card-bio">Kristian har en bachelor i Idræt og Sundhed, og...</p>
-                                </div>
-                                <button class="icon-tertiary-btn">LÆS OM KRISTIAN</button>
+                                    <p class="card-bio" v-if="!trainerPopups.trainer4">Kristian har en bachelor i Idræt og Sundhed, og...</p>
+                                </div><p v-if="trainerPopups.trainer4"> hahahaha</p>
+                                <button class="icon-tertiary-btn" @click="togglePopup('trainer4')">LÆS OM KRISTIAN</button>
                             </div>
                             <button @click="selectTrainer('Kristian')" :class="getTrainerClass('Kristian')">
                                 Vælg træner
@@ -124,9 +139,9 @@ let prev = () => {
                                 <div class="card-content">
                                     <div class="avatar"></div>
                                     <p class="body-large body-bold">Mads</p>
-                                    <p class="card-bio">Mads er personlig træner og fordyber sig i...</p>
-                                </div>
-                                <button class="icon-tertiary-btn">LÆS OM MADS</button>
+                                    <p class="card-bio" v-if="!trainerPopups.trainer5">Mads er personlig træner og fordyber sig i...</p>
+                                </div><p v-if="trainerPopups.trainer5"> hahahaha</p>
+                                <button class="icon-tertiary-btn" @click="togglePopup('trainer5')">LÆS OM MADS</button>
                             </div>
                             <button @click="selectTrainer('Mads')" :class="getTrainerClass('Mads')">
                                 Vælg træner

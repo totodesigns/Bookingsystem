@@ -70,8 +70,9 @@ const skip = () => {
       <div class="form">
         <label for="contactPreference">Hvordan vil du kontaktes?*</label>
         <select v-model="contactPref" id="contactPreference" class="short-form form-style">
-          <option value="call">På telefon</option>
-          <option value="email">På email</option>
+          <option value="call">På Telefon</option>
+          <option value="sms">På SMS</option>
+          <option value="email">På Email</option>
         </select>
       </div>
     </div>
