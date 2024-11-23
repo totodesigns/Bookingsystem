@@ -2,17 +2,37 @@
 import { ref } from 'vue';
 import { db } from '../../firebase';
 import { ref as dbRef, set } from 'firebase/database';
-
+import { defineProps } from 'vue';
 import MemberForm from '@/components/MemberForm.vue';
 import ChooseTrainer from './ChooseTrainer.vue';
 import Thanks from './Thanks.vue';
 
-
 const activeView = ref('confirmation'); // Default to the confirmation page
+
+const props = defineProps({
+        fullName: String,
+        contactPref: String,
+        phone: Number,
+        email: String,
+        message: String,
+    });
+
+// Function to save the current booking data into localStorage
+const saveDataToLocalStorage = () => {
+  localStorage.setItem('selectedSession',JSON.stringify({
+      sessionId: sessionId.value,
+      sessionDetails: sessionDetails.value,
+    }))
+    localStorage.setItem('userSession', JSON.stringify({
+      userDetails: userDetails.value,
+    }))
+};
 
 const setActiveView = (view) => {
   activeView.value = view;
+  saveDataToLocalStorage();
 };
+
 // ______________________________________________________________________
 
 const bookingData = JSON.parse(localStorage.getItem('selectedSession'));
@@ -64,7 +84,6 @@ const completeSignup = async () => {
 
 
 <template>
-  <!-- Confirmation Page -->
   <div v-if="activeView === 'confirmation'">
     <h1>Booking Confirmation</h1>
     <div>
@@ -84,7 +103,7 @@ const completeSignup = async () => {
     <p><strong>Trainer:</strong> {{ sessionDetails.name || 'N/A' }}</p>
     <p><strong>Date:</strong> {{ sessionDetails.date || 'N/A' }}</p>
     <p><strong>Time:</strong> {{ sessionDetails.time || 'N/A' }}</p>
-    <button @click="completeSignup(), confirm()">Complete Signup</button>
+    <button @click="completeSignup()">Complete Signup</button>
   </div>
 
   <!-- Thanks Page -->
@@ -94,8 +113,14 @@ const completeSignup = async () => {
   <MemberForm v-if="activeView === 'memberForm'" />
 
   <!-- Choose Trainer -->
-  <ChooseTrainer v-if="activeView === 'chooseTrainer'" />
+  <ChooseTrainer v-if="activeView === 'chooseTrainer'" 
+    :fullName="fullName"
+    :contactPref="contactPref"
+    :phone="phone"
+    :email="email"
+    :message="message"/>
 </template>
+
 
 
 <style scoped>

@@ -18,6 +18,7 @@
         email: String,
         message: String,
     });
+
     const wrapper = ref(true);
     const AllanTime = ref(false);
     const OleTime = ref(false);
@@ -69,8 +70,8 @@ let prev = () => {
 </script>
 
 <template>
-    <div  v-if="!showFormView">
-        <ProgressBar />
+  
+    <div class="content" v-if="!showFormView">
         <div class="flow-block" v-if="wrapper">
             <div class="flow-content">
                 <div class="flow-header">

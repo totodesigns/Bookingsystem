@@ -7,6 +7,7 @@
 
 <template>
     <NavBar />
+    <div class="content"></div>
     <div>
         <div class="flow-block">
             <LoginForm />
