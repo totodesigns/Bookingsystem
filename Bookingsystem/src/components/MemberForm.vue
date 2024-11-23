@@ -40,8 +40,8 @@ const skip = () => {
 
 </script>
 
-<template>
-  <div class="content">
+<template >
+  <div >
     <ProgressBar />
     <div class="flow-block" v-if="!showTrainerView">
       <div class="flow-content">

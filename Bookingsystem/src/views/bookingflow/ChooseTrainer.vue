@@ -69,7 +69,7 @@ let prev = () => {
 </script>
 
 <template>
-    <div class="content" v-if="!showFormView">
+    <div  v-if="!showFormView">
         <ProgressBar />
         <div class="flow-block" v-if="wrapper">
             <div class="flow-content">
