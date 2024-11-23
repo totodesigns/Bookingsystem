@@ -3,12 +3,17 @@ import { ref } from 'vue';
 import { db } from '../../firebase';
 import { ref as dbRef, set } from 'firebase/database';
 
-//Routing stuff
+import MemberForm from '@/components/MemberForm.vue';
+import ChooseTrainer from './ChooseTrainer.vue';
 import Thanks from './Thanks.vue';
-const showThanksView = ref(false);
-let confirm = () => {
-  showThanksView.value = true;
-}
+
+
+const activeView = ref('confirmation'); // Default to the confirmation page
+
+const setActiveView = (view) => {
+  activeView.value = view;
+};
+// ______________________________________________________________________
 
 const bookingData = JSON.parse(localStorage.getItem('selectedSession'));
 
@@ -53,37 +58,46 @@ const completeSignup = async () => {
   confirm();
 };
 
+
+
 </script>
 
 
 <template>
-<div v-if="!showThanksView"> 
-  <div>
+  <!-- Confirmation Page -->
+  <div v-if="activeView === 'confirmation'">
     <h1>Booking Confirmation</h1>
     <div>
-      <h2>Session Details</h2>
-      <button> rediger</button>
-    </div>
-    <p><strong>Session ID:</strong> {{ bookingData.sessionId || 'N/A' }}</p>
-
-    <p><strong>Trainer:</strong> {{ sessionDetails.name || 'N/A' }}</p>
-    <p><strong>Date:</strong> {{ sessionDetails.date || 'N/A' }}</p>
-    <p><strong>Time:</strong> {{ sessionDetails.time || 'N/A' }}</p>
-    <div>
       <h2>User Details</h2>
-      <button> Rediger</button>
+      <button @click="setActiveView('memberForm')">Rediger1</button>
     </div>
     <p><strong>Full Name:</strong> {{ userDetails.fullName || 'N/A' }}</p>
     <p><strong>Contact Preference:</strong> {{ userDetails.contactPref || 'N/A' }}</p>
     <p><strong>Phone:</strong> {{ userDetails.phone || 'N/A' }}</p>
     <p><strong>Email:</strong> {{ userDetails.email || 'N/A' }}</p>
     <p><strong>Message:</strong> {{ userDetails.message || 'N/A' }}</p>
+    <div>
+      <h2>Session Details</h2>
+      <button @click="setActiveView('chooseTrainer')">Rediger2</button>
+    </div>
+    <p><strong>Session ID:</strong> {{ bookingData.sessionId || 'N/A' }}</p>
+    <p><strong>Trainer:</strong> {{ sessionDetails.name || 'N/A' }}</p>
+    <p><strong>Date:</strong> {{ sessionDetails.date || 'N/A' }}</p>
+    <p><strong>Time:</strong> {{ sessionDetails.time || 'N/A' }}</p>
+    <button @click="completeSignup(), confirm()">Complete Signup</button>
   </div>
-  <button @click="completeSignup(), confirm()">Complete Signup</button>
-</div>
-<Thanks v-if="showThanksView"/>
+
+  <!-- Thanks Page -->
+  <Thanks v-if="activeView === 'thanks'" />
+
+  <!-- Member Form -->
+  <MemberForm v-if="activeView === 'memberForm'" />
+
+  <!-- Choose Trainer -->
+  <ChooseTrainer v-if="activeView === 'chooseTrainer'" />
 </template>
 
 
 <style scoped>
+
 </style>

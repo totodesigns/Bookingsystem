@@ -1,13 +1,13 @@
 <script setup>
 import { ref } from 'vue';
 import { db } from '@/firebase';
-import { ref as dbRef, onValue } from 'firebase/database';
+import { ref as dbRef, onValue, remove } from 'firebase/database';
 import Back from '@/components/Back.vue';
 const bookedSessions = ref([]);
 
 // Fetch booked sessions dynamically based on the unique keys (date__time)
 const fetchBookedSessions = () => {
-  const bookedSessionsRef = dbRef(db, 'trainerInfo/booked-sessions');
+  const bookedSessionsRef = dbRef(db, 'trainerInfo/booked-sessions/');
   
   onValue(bookedSessionsRef, (snapshot) => {
     if (snapshot.exists()) {
@@ -20,23 +20,49 @@ const fetchBookedSessions = () => {
         const sessionDetails = sessionData.sessionDetails || {};
         const userDetails = sessionData.userDetails || {};
 
+        // Conditional check to ensure properties exist
+        const fullName = userDetails._value?.fullName || 'Unknown Member';
+        const date = sessionDetails._value?.date || 'Unknown Date';
+        const time = sessionDetails._value?.time || 'Unknown Time';
+        const message = userDetails._value?.message || '';
+        const contactPref = userDetails._value?.contactPref || 'Unknown';
+        const phone = userDetails._value?.phone || 'N/A';
+        const email = userDetails._value?.email || 'N/A';
+        const name = sessionDetails._value?.name || 'Unknown Trainer';
+
         sessions.push({
-          fullName: userDetails._value.fullName,
-          date: sessionDetails._value.date,
-          time: sessionDetails._value.time,
-          message: userDetails._value.message,
-          contactPref: userDetails._value.contactPref,
-          phone: userDetails._value.phone,
-          email: userDetails._value.email,
-          name: sessionDetails._value.name,
+          id: sessionKey, // Add the session key to uniquely identify the session
+          fullName,
+          date,
+          time,
+          message,
+          contactPref,
+          phone,
+          email,
+          name,
         });
       }
 
       bookedSessions.value = sessions;
+    } else {
+      // Handle case where no sessions exist in the database
+      bookedSessions.value = [];
     }
   });
 };
+// remove trainer cards on click
+const removeTrainerCard = async (sessionId) => {
+  try {
+    const sessionRef = dbRef(db, `trainerInfo/booked-sessions/${sessionId}`);
+    await remove(sessionRef); // Remove the session from Firebase
 
+    bookedSessions.value = bookedSessions.value.filter(session => session.id !== sessionId); // Remove it from the local array
+    alert('Trainer session removed successfully!');
+  } catch (error) {
+    console.error('Error removing session:', error);
+    alert('Failed to remove the trainer session. Please try again.');
+  }
+};
 // Call function to fetch data on component creation
 fetchBookedSessions();
 
@@ -60,6 +86,7 @@ fetchBookedSessions();
         <p>Foretrækker at blive kontaktet på: {{ session.contactPref }} </p>  
         <p>Telefonnummer: {{ session.phone }} </p>  
         <p>Email: {{ session.email }} </p>  
+        <button class="remove-btn" @click="removeTrainerCard(session.id)">Remove</button>
       </li>
     </ul>
   </div>
