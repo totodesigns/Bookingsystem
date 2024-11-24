@@ -17,22 +17,23 @@ const next = () => {
     errorMessage.value = 'Please fill in all required fields.';
     return;
   }
-  // // Save form data to localStorage
-  // const formData = {
-  //   name: name.value,
-  //   email: email.value,
-  //   phone: phone.value,
-  //   message: message.value,
-  //   contactPref: contactPref.value,
-  //   signedDate: new Date().toISOString(),
-  // };
+  // Save form data to localStorage
+  const formData = {
+    fullName: name.value,
+    email: email.value,
+    phone: phone.value,
+    message: message.value,
+    contactPref: contactPref.value,
+    signedDate: new Date().toISOString(),
+  };
 
-  // // localStorage.setItem('signupFormData', JSON.stringify(formData));
-  // // console.log('Form data saved to localStorage:', formData);
+  localStorage.setItem('userDetails', JSON.stringify(formData));
+  console.log('User data saved to localStorage:', formData);
 
   // Navigate to the next view
   showTrainerView.value = true;
 };
+
 
 const skip = () => {
   showTrainerView.value = true;
@@ -70,8 +71,9 @@ const skip = () => {
       <div class="form">
         <label for="contactPreference">Hvordan vil du kontaktes?*</label>
         <select v-model="contactPref" id="contactPreference" class="short-form form-style">
-          <option value="call">På telefon</option>
-          <option value="email">På email</option>
+          <option value="call">På Telefon</option>
+          <option value="sms">På SMS</option>
+          <option value="email">På Email</option>
         </select>
       </div>
     </div>
@@ -84,8 +86,7 @@ const skip = () => {
   </div>
 
 
-  <ChooseTrainer
-    v-if="showTrainerView"
+  <ChooseTrainer v-if="showTrainerView"
     :fullName="name"
     :contactPref="contactPref"
     :phone="phone"
