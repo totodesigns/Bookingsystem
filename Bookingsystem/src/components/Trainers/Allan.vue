@@ -68,6 +68,7 @@ const submitSession = () => {
     }
     confirm();
 };
+
 </script>
 
 <template>
@@ -89,7 +90,13 @@ const submitSession = () => {
     </div>
   </div>
     <ChooseTrainer v-if="showTrainerView"/>
-    <Confirmation v-if="showConfirmationView"/>
+    <Confirmation v-if="showConfirmationView"
+    :fullName="fullName" 
+    :contactPref="contactPref" 
+    :phone="phone" 
+    :email="email" 
+    :message="message"/>
+    
 </template>
 
 <style scoped>

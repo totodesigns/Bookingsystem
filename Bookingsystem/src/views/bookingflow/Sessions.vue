@@ -7,7 +7,7 @@ const bookedSessions = ref([]);
 
 // Fetch booked sessions dynamically based on the unique keys (date__time)
 const fetchBookedSessions = () => {
-  const bookedSessionsRef = dbRef(db, 'trainerInfo/booked-sessions');
+  const bookedSessionsRef = dbRef(db, 'trainerInfo/booked-sessions/');
   
   onValue(bookedSessionsRef, (snapshot) => {
     if (snapshot.exists()) {
@@ -34,10 +34,12 @@ const fetchBookedSessions = () => {
       }
 
       bookedSessions.value = sessions;
+    } else {
+      // Handle case where no sessions exist in the database
+      bookedSessions.value = [];
     }
   });
 };
-
 // Call function to fetch data on component creation
 fetchBookedSessions();
 
