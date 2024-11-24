@@ -1,23 +1,208 @@
 <script setup>
+import { ref } from 'vue';
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
+// VVVVVV NAVIGATION ROUTES!!!!! VVVVVV //
+
 let index = () => {
   router.push('/');
 }
+
+let medlemskaber = () => {
+  router.push('/medlemskaber');
+}
+
+let personligtraening = () => {
+  router.push('/personligtraening');
+}
+
+let strongsenior = () => {
+  router.push('/strongsenior');
+}
+
+let styrkehold = () => {
+  router.push('/styrkehold');
+}
+
+let yoga = () => {
+  router.push('/yoga');
+}
+
+let spinning = () => {
+  router.push('/spinning');
+}
+
+let holdtraening = () => {
+  router.push('/holdtraening');
+}
+
+let traeningsforloeb = () => {
+  router.push('/traeningsforloeb');
+}
+
+let strongstart = () => {
+  router.push('/strongstart');
+}
+let stronglife = () => {
+  router.push('/stronglife');
+}
+let staerkovergang = () => {
+  router.push('/staerkovergang');
+}
+
+let sponsor = () => {
+  router.push('/sponsor');
+}
+let moeder = () => {
+  router.push('/moederogtraening');
+}
+
+let kontakt = () => {
+  router.push('/kontakt');
+}
+
+let trainer = () => {
+  router.push('/trainer');
+}
+
+// Reactive object to manage the state of multiple dropdowns
+const dropdownStates = ref({
+  holdtraening: false,
+  traeningsforloeb: false,
+  erhverv: false,
+});
+
+// Toggle a specific dropdown's visibility and close others
+const toggleDropdown = (dropdownKey) => {
+  // Reset all dropdown states
+  for (const key in dropdownStates.value) {
+    dropdownStates.value[key] = false;
+  }
+  // Open the clicked dropdown
+  dropdownStates.value[dropdownKey] = true;
+};
+
+const isMenuOpen = ref(false);
+
+let openMenu = () => {
+  isMenuOpen.value = !isMenuOpen.value;
+};
+
 </script>
 
 <template>
   <nav>
     <button @click="index"><p class="logo t2 body-bold">STRONG4LIFE</p></button>
     <div id="nav-items">
-      <button @click="" class="default-tertiary-btn">MEDLEMSKABER</button>
-      <button @click="" class="default-tertiary-btn">KONTAKT</button>
-      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
-        <rect width="40" height="40" rx="20" fill="#141414"/>
-        <path d="M10 14H30M10 20H30M10 26H30" stroke="#F5F5F5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
+      <button @click="medlemskaber" class="default-tertiary-btn">MEDLEMSKABER</button>
+      <button @click="kontakt" class="default-tertiary-btn">KONTAKT</button>
+      <button @click="openMenu">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+          <rect width="40" height="40" rx="20" fill="#141414" />
+          <path d="M10 14H30M10 20H30M10 26H30" stroke="#F5F5F5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </button>
     </div>
   </nav>
+
+  <!-- Full-screen menu overlay -->
+  <transition name="menu-fade">
+    <div v-if="isMenuOpen" class="menu-overlay">
+      <nav>
+        <p class="logo t2 body-bold">STRONG4LIFE</p>
+        <div id="nav-items">
+          <button @click="openMenu">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+              <rect width="40" height="40" rx="20" fill="#141414" />
+              <path d="M13 13L27 27M13 27L27 13" stroke="#F5F5F5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </button>
+        </div>
+      </nav>
+      <div class="menu-content">
+        <button @click="medlemskaber" class="default-tertiary-btn"><p class="t1">MEDLEMSKABER</p></button>
+        <button @click="personligtraening" class="default-tertiary-btn"><p class="t1">PERSONLIG TRÆNING</p></button>
+
+        <!-- HOLDTRÆNING -->
+        <div class="menu-dropdown">
+          <button @click="toggleDropdown('holdtraening')" :class="{ 'has-margin-left': dropdownStates.holdtraening }" type="button" class="icon-tertiary-btn">
+            <p class="t1">HOLDTRÆNING</p>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M9 5L16 12L9 19" class="grey-i" />
+            </svg>
+          </button>
+          <div v-if="dropdownStates.holdtraening" class="menu-dropdown-items">
+            <p class="blue-text">HOLDTRÆNING</p>
+            <button @click="strongsenior" class="default-tertiary-btn"><p class="t2">STRONG SENIOR</p></button>
+            <button @click="styrkehold" class="default-tertiary-btn"><p class="t2">STYRKEHOLD</p></button>
+            <button @click="yoga" class="default-tertiary-btn"><p class="t2">YOGA</p></button>
+            <button @click="spinning" class="default-tertiary-btn"><p class="t2">SPINNING</p></button>
+            <button @click="holdtraening" class="default-tertiary-btn"><p class="t2 blue-text">SE ALLE HOLD</p></button>
+          </div>
+        </div>
+
+        <!-- TRÆNINGSFORLØB -->
+        <div class="menu-dropdown">
+          <button @click="toggleDropdown('traeningsforloeb')" :class="{ 'has-margin-left': dropdownStates.traeningsforloeb }" type="button" class="icon-tertiary-btn">
+            <p class="t1">TRÆNINGSFORLØB</p>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M9 5L16 12L9 19" class="grey-i" />
+            </svg>
+          </button>
+          <div v-if="dropdownStates.traeningsforloeb" class="menu-dropdown-items">
+            <p class="blue-text">TRÆNINGSFORLØB</p>
+            <button @click="staerkovergang" class="default-tertiary-btn"><p class="t2">STÆRK OVERGANG</p></button>
+            <button @click="strongstart" class="default-tertiary-btn"><p class="t2">STRONG START</p></button>
+            <button @click="stronglife" class="default-tertiary-btn"><p class="t2">STRONG LIFE</p></button>
+            <button @click="traeningsforloeb" class="default-tertiary-btn"><p class="t2 blue-text">SE ALLE FORLØB</p></button>
+          </div>
+        </div>
+
+        <!-- ERHVERV -->
+        <div class="menu-dropdown">
+          <button @click="toggleDropdown('erhverv')" :class="{ 'has-margin-left': dropdownStates.erhverv }" type="button" class="icon-tertiary-btn">
+            <p class="t1">ERHVERV</p>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M9 5L16 12L9 19" class="grey-i" />
+            </svg>
+          </button>
+          <div v-if="dropdownStates.erhverv" class="menu-dropdown-items">
+            <p class="blue-text">ERHVERV</p>
+            <button @click="sponsor" class="default-tertiary-btn"><p class="t2">SPONSORFÆLLESSKAB</p></button>
+            <button @click="moeder" class="default-tertiary-btn"><p class="t2">MØDER OG TRÆNING</p></button>
+          </div>
+        </div>
+
+        <button @click="kontakt" class="default-tertiary-btn"><p class="t1">OM OS</p></button>
+        <button @click="kontakt" class="default-tertiary-btn"><p class="t1">KONTAKT</p></button>
+      </div>
+      <div class="footer-info" id="nav-info">
+            <button type="button" @click="trainer" class="default-tertiary-btn">
+              LOG IND SOM TRÆNER
+            </button>
+            <div class="some-links">
+                <div class="some centered">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="41" height="40" viewBox="0 0 41 40" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M26.7083 36.6668V23.7585H31.0417L31.69 18.7285H26.7067V15.5168C26.7067 14.0602 27.1117 13.0668 29.2017 13.0668H31.865V8.56683C30.5753 8.42825 29.2788 8.36148 27.9817 8.36683C24.1417 8.36683 21.5133 10.7118 21.5133 15.0168V18.7285H17.1667V23.7585H21.5117V36.6668H5.67334C4.65668 36.6668 3.83334 35.8435 3.83334 34.8268V5.1735C3.83334 4.15683 4.65668 3.3335 5.67334 3.3335H35.3267C36.3433 3.3335 37.1667 4.15683 37.1667 5.1735V34.8268C37.1667 35.8435 36.3433 36.6668 35.3267 36.6668H26.7083Z" fill="#202020"/>
+                    </svg>
+                    <p class="caption">Facebook</p>
+                </div>
+                <div class="some centered">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="41" height="40" viewBox="0 0 41 40" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M10.1857 2.24854C8.21301 2.24854 6.32105 3.032 4.92586 4.42665C3.53067 5.8213 2.74649 7.71296 2.74573 9.68568V29.5257C2.74573 31.4989 3.52958 33.3913 4.92485 34.7866C6.32012 36.1818 8.21252 36.9657 10.1857 36.9657H30.0257C31.9984 36.9649 33.8901 36.1807 35.2848 34.7855C36.6794 33.3904 37.4629 31.4984 37.4629 29.5257V9.68568C37.4621 7.71346 36.6783 5.82223 35.2837 4.42766C33.8892 3.03309 31.9979 2.24929 30.0257 2.24854H10.1857ZM32.1657 9.69711C32.1657 10.2654 31.94 10.8105 31.5381 11.2123C31.1362 11.6142 30.5912 11.84 30.0229 11.84C29.4545 11.84 28.9095 11.6142 28.5076 11.2123C28.1058 10.8105 27.88 10.2654 27.88 9.69711C27.88 9.12879 28.1058 8.58374 28.5076 8.18188C28.9095 7.78001 29.4545 7.55425 30.0229 7.55425C30.5912 7.55425 31.1362 7.78001 31.5381 8.18188C31.94 8.58374 32.1657 9.12879 32.1657 9.69711ZM20.1086 13.6628C18.5324 13.6628 17.0209 14.2889 15.9064 15.4034C14.7919 16.5179 14.1657 18.0295 14.1657 19.6057C14.1657 21.1818 14.7919 22.6934 15.9064 23.8079C17.0209 24.9224 18.5324 25.5485 20.1086 25.5485C21.6847 25.5485 23.1963 24.9224 24.3108 23.8079C25.4253 22.6934 26.0514 21.1818 26.0514 19.6057C26.0514 18.0295 25.4253 16.5179 24.3108 15.4034C23.1963 14.2889 21.6847 13.6628 20.1086 13.6628ZM11.3057 19.6057C11.3057 17.2718 12.2329 15.0335 13.8832 13.3831C15.5335 11.7328 17.7718 10.8057 20.1057 10.8057C22.4396 10.8057 24.6779 11.7328 26.3283 13.3831C27.9786 15.0335 28.9057 17.2718 28.9057 19.6057C28.9057 21.9396 27.9786 24.1779 26.3283 25.8282C24.6779 27.4785 22.4396 28.4057 20.1057 28.4057C17.7718 28.4057 15.5335 27.4785 13.8832 25.8282C12.2329 24.1779 11.3057 21.9396 11.3057 19.6057Z" fill="#202020"/>
+                    </svg>
+                    <p class="caption">Instagram</p>
+                </div>
+                <div class="some centered">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                        <path d="M34.1167 3.33324H5.88335C5.56598 3.32883 5.25085 3.38699 4.95596 3.50438C4.66107 3.62177 4.39219 3.79611 4.16468 4.01743C3.93717 4.23875 3.75549 4.50271 3.63 4.79426C3.50452 5.0858 3.4377 5.3992 3.43335 5.71657V34.2832C3.4377 34.6006 3.50452 34.914 3.63 35.2056C3.75549 35.4971 3.93717 35.7611 4.16468 35.9824C4.39219 36.2037 4.66107 36.378 4.95596 36.4954C5.25085 36.6128 5.56598 36.671 5.88335 36.6666H34.1167C34.4341 36.671 34.7492 36.6128 35.0441 36.4954C35.339 36.378 35.6078 36.2037 35.8354 35.9824C36.0629 35.7611 36.2445 35.4971 36.37 35.2056C36.4955 34.914 36.5623 34.6006 36.5667 34.2832V5.71657C36.5623 5.3992 36.4955 5.0858 36.37 4.79426C36.2445 4.50271 36.0629 4.23875 35.8354 4.01743C35.6078 3.79611 35.339 3.62177 35.0441 3.50438C34.7492 3.38699 34.4341 3.32883 34.1167 3.33324ZM13.4833 31.2332H8.48335V16.2332H13.4833V31.2332ZM10.9833 14.1332C10.2938 14.1332 9.63247 13.8593 9.14487 13.3717C8.65728 12.8841 8.38335 12.2228 8.38335 11.5332C8.38335 10.8437 8.65728 10.1824 9.14487 9.69476C9.63247 9.20717 10.2938 8.93324 10.9833 8.93324C11.3495 8.89172 11.7203 8.928 12.0715 9.03971C12.4226 9.15143 12.7462 9.33606 13.0211 9.58151C13.296 9.82696 13.5159 10.1277 13.6665 10.464C13.817 10.8004 13.8949 11.1647 13.8949 11.5332C13.8949 11.9017 13.817 12.2661 13.6665 12.6024C13.5159 12.9388 13.296 13.2395 13.0211 13.485C12.7462 13.7304 12.4226 13.9151 12.0715 14.0268C11.7203 14.1385 11.3495 14.1748 10.9833 14.1332ZM31.5167 31.2332H26.5167V23.1832C26.5167 21.1666 25.8 19.8499 23.9833 19.8499C23.4211 19.854 22.8737 20.0304 22.4147 20.3552C21.9558 20.68 21.6075 21.1377 21.4167 21.6666C21.2863 22.0583 21.2297 22.4709 21.25 22.8832V31.2166H16.25V16.2166H21.25V18.3332C21.7042 17.5451 22.3649 16.8958 23.1608 16.4552C23.9566 16.0147 24.8576 15.7997 25.7667 15.8332C29.1 15.8332 31.5167 17.9832 31.5167 22.5999V31.2332Z" fill="#202020"/>
+                    </svg>
+                    <p class="caption">LinkedIn</p>
+                </div>
+            </div>
+      </div>
+    </div>
+  </transition>
 </template>

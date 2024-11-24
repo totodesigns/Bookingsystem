@@ -5,17 +5,14 @@ button {
     background-color: inherit;
 }
 
-.stretch {
-    width: 100%;
-}
-
 .default-primary-btn {
     padding: 16px 24px;
-    color: c.$neutral-1;
     border: none;
     border-radius: 8px;
     background-color: c.$blue-6;
+    width: fit-content;
     transition: 0.3s ease;
+    color: c.$neutral-1;
     &:hover {
         background-color: c.$blue-7;
     }
@@ -30,6 +27,7 @@ button {
     border: none;
     border-radius: 8px;
     background-color: c.$blue-6;
+    width: fit-content;
     transition: 0.3s ease;
     &:hover {
         background-color: c.$blue-7;
@@ -79,10 +77,12 @@ button {
 
 .default-tertiary-btn {
     display: inline-flex;
-    justify-content: center;
+    width: fit-content;
+    height: fit-content;
+    justify-content: flex-start;
     position: relative;
     text-decoration: none;
-    color: c.$neutral-10; // Initial text color
+    color: c.$neutral-7; // Initial text color
     transition: color 0.3s ease;
 }
 
@@ -93,28 +93,33 @@ button {
     height: 2px;
     bottom: -1px;
     right: 50%;
-    background-color: c.$neutral-6;
+    background-color: c.$neutral-7;
     transition: width 0.3s ease, right 0.3s ease;
 }
 
 .default-tertiary-btn:hover {
-    color: c.$blue-6; // Change text color on hover
+    color: c.$blue-6;
+    .grey-text {
+        color: c.$blue-6;
+    }
 }
 
 .default-tertiary-btn:hover::after {
-    background-color: c.$blue-6; // Change underline color
+    background-color: c.$blue-6;
     width: 100%;
     right: 0;
 }
 
 .icon-tertiary-btn {
+    width: fit-content;
     display: inline-flex;
-    justify-content: center;
+    justify-content: flex-start;
+    align-items: center;
     padding: 0px;
     gap: 4px;
     position: relative;
     text-decoration: none;
-    color: c.$neutral-6; // Initial text color
+    color: c.$neutral-7;
     transition: 0.3s ease;
 }
 
@@ -125,14 +130,20 @@ button {
     height: 2px;
     bottom: -1px;
     right: 50%;
-    background-color: c.$neutral-6;
+    background-color: c.$neutral-7;
     transition: 0.3s ease;
 }
 
 .icon-tertiary-btn:hover {
-    color: c.$blue-6; // Change text color on hover
+    color: c.$blue-6;
     gap: 8px;
-    .chevron-tertiary {
+    .grey-text {
+        color: c.$blue-6;
+    }
+    .grey-i {
+        stroke: c.$blue-6;
+    }
+    .white-i {
         stroke: c.$blue-6;
     }
 }
@@ -143,6 +154,10 @@ button {
     right: 0;
 }
 
+button:disabled {
+    opacity: 30%;
+    cursor: default;
+}
 
 .default-inactive-btn {
     padding: 16px 24px;
@@ -181,4 +196,8 @@ button {
     color: c.$neutral-1;
     box-shadow: 2px 1px 4px 0px rgba(122, 122, 122, 0.10);
     transition: 0.2s ease;
+}
+
+.white-f {
+    color: c.$neutral-1;
 }

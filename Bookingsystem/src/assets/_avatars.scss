@@ -1,4 +1,52 @@
-.allanimg {
+.avatar-img-s {
+    width: 100px;
+    height: 100px;
     border-radius: 100px;
+    background-position: center;
+    background-size: cover;
+}
+
+.avatar-img-m {
+    width: 124px;
+    height: 124px;
+    border-radius: 100px;
+    background-position: center;
+    background-size: cover;
+}
+
+.avatar-img-l {
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+    background-position: center;
+    background-size: cover;
+}
+
+
+
+.allanimg {
+    background-image: url("/avatars/allanavatar.jpg");
+}
+
+.oleimg {
+    background-image: url("/avatars/oleavatar.jpg");
+}
+
+.emilieimg {
+    background-image: url("/avatars/emilieavatar.jpg");
+}
+
+.kristianimg {
+    background-image: url("/avatars/kristianavatar.jpg");
+}
+
+.madsimg {
+    background-image: url("/avatars/madsavatar.jpg");
+}
+
+.mareteimg {
+    background-image: url("/avatars/mareteavatar.jpg");
+}
+=======
     background: url('Bookingsystem\src\assets\avatars\allanavatar.jpg') lightgray 50% / cover no-repeat;
 }
