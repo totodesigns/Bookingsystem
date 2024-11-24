@@ -12,6 +12,14 @@ let bookstart = () => {
   router.push("/booking")
 }
 
+let medlemskaber = () => {
+  router.push("/medlemskaber")
+}
+
+let sponsor = () => {
+  router.push("/sponsor")
+}
+
 </script>
 
 <template>
@@ -108,7 +116,7 @@ let bookstart = () => {
               Vi tilbyder en personlig og inkluderende tilgang, der sætter dig i centrum. Uanset om du er til individuel træning eller holdtræning, bliver du mødt af et engageret team af dygtige instruktører, der støtter dig i at nå dine mål.<br><br>
               Vores fitnesscenter er skabt til dig, der ønsker en balance mellem høj kvalitet, moderne udstyr og en atmosfære, hvor du føler dig hjemme. Hos os er der tid og plads - til dig og din udvikling.</p>
         </div>
-        <button type="button" class="icon-primary-btn">
+        <button type="button" @click="medlemskaber" class="icon-primary-btn">
           FIND DIT MEDLEMSKAB HER
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
               <path d="M9 5L16 12L9 19" class="chevron white-i"/>
@@ -124,7 +132,7 @@ let bookstart = () => {
           <h3>Vi samarbejder med alle slags virksomheder</h3>
           <p>I Strong4life Erhvervssponsorfællesskab er der repræsenteret en bred vifte af lokale fynske og odenseanske virksomheder. Vores sponsorfællesskab består af håndværkere, IT-virksomheder, servicevirksomheder, konsulentvirksomheder, iværksættere og veletablerede virksomheder.</p>
         </div>
-        <button type="button" class="icon-tertiary-btn">
+        <button type="button" @click="sponsor" class="icon-tertiary-btn">
           LÆS MERE OM VORES SPONSORFÆLLESSKAB
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
               <path d="M9 5L16 12L9 19" class="chevron grey-i"/>

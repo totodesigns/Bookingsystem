@@ -10,7 +10,11 @@ import ContactBlock from '@/components/ContactBlock.vue';
 import FooterBlock from '@/components/Footer.vue';
 
 let bookstart = () => {
-  router.push('/bookstart');
+  router.push('/booking');
+}
+
+let kontakt = () => {
+  router.push('/kontakt');
 }
 
 </script>
@@ -56,7 +60,7 @@ let bookstart = () => {
                         </div>
                     </div>
                     <p class="centered">Ugentlig personlig træning for 1</p>
-                    <button type="button" @click="" class="icon-primary-btn stretch">
+                    <button type="button" @click="kontakt" class="icon-primary-btn stretch">
                         BOOK 1:1 TRÆNING
                             <!--CHEVRON RIGHT-->
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -74,7 +78,7 @@ let bookstart = () => {
                         </div>
                     </div>
                     <p class="centered">Ugentlig personlig træning for 1</p>
-                    <button type="button" @click="" class="icon-primary-btn stretch">
+                    <button type="button" @click="kontakt" class="icon-primary-btn stretch">
                         BOOK 1:2 TRÆNING
                             <!--CHEVRON RIGHT-->
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -94,7 +98,7 @@ let bookstart = () => {
                         </div>
                     </div>
                     <p class="centered">1 gang om ugen</p>
-                    <button type="button" @click="" class="icon-primary-btn stretch">
+                    <button type="button" @click="kontakt" class="icon-primary-btn stretch">
                         BOOK GRUPPETRÆNING 1
                             <!--CHEVRON RIGHT-->
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -112,7 +116,7 @@ let bookstart = () => {
                         </div>
                     </div>
                     <p class="centered">Ugentlig personlig træning for 1</p>
-                    <button type="button" @click="" class="icon-primary-btn stretch">
+                    <button type="button" @click="kontakt" class="icon-primary-btn stretch">
                         BOOK 1:2 TRÆNING
                             <!--CHEVRON RIGHT-->
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -134,7 +138,7 @@ let bookstart = () => {
                 <p>I STRONG4LIFE har vi alle relevante universitetsuddannelser. Vi reklamerer ikke med “six-pack på 8 uger”-forløb, men laver træning, der skaber langvarige resultater. Vi har erfaring med alt fra elitesport og Ironman til vægttab til styrkeforøgelse og til forhøjning af generel sundhed og trivsel. Når vi planlægger træning, så sørger vi for, at træningen er realistisk for dig – også i mere end bare 8 uger.</p>
                 <p>Er vi et match? Kontakt os, så tager vi en uforpligtende snak – gerne fulgt op af et besøg i vores træningscenter – og finder ud af det. </p>
             </div>
-            <button type="button" @click="bookstart" class="icon-tertiary-btn">
+            <button type="button" @click="kontakt" class="icon-tertiary-btn">
                 LÆS OM VORES VÆRDIER
                     <!--CHEVRON RIGHT-->
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">

@@ -35,7 +35,7 @@ let kontakt = () => {
                 <div class="tag-bar">
                     <p class="body-large white-text centered" id="popular">POPULÆRT</p>
                     <div class="subscription-card">
-                        <div class="text-gap-s">
+                        <div class="text-gap-s centered">
                             <h3>Base</h3>
                             <div class="text-gap-xs">
                                 <p class="t1 blue-text centered">495,-</p>
@@ -127,7 +127,7 @@ let kontakt = () => {
                 <div class="tag-bar">
                     <p class="body-large white-text centered" id="normal-tag">TIL DE SERIØSE</p>
                     <div class="subscription-card">
-                        <div class="text-gap-s">
+                        <div class="text-gap-s centered">
                             <h3>Peak</h3>
                             <div class="text-gap-xs">
                                 <p class="t1 blue-text centered">995,-</p>
