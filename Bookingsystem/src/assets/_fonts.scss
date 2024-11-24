@@ -1,3 +1,5 @@
+@use '_colors.scss' as c;
+
 .display {
     font-size: 80px;
     line-height: 100px;
@@ -46,8 +48,8 @@ p {
 }
 .caption {
     font-size: 12px;
-    line-height: 20px;
-    font-weight: 300;
+    line-height: 18px;
+    font-weight: 400;
 }
 .body-bold {
     font-weight: 700;
@@ -67,4 +69,19 @@ button {
 
 a {
     font-family: 'Montserrat';
+    text-decoration: none;
+    color: inherit;
+    line-height: 150%;
+}
+
+.blue-text {
+    color: c.$blue-7;
+}
+
+.white-text {
+    color: c.$neutral-1;
+}
+
+.grey-text {
+    color: c.$neutral-7;
 }

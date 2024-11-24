@@ -9,7 +9,7 @@
     import Mads from '@/components/Trainers/Mads.vue';
     import { defineProps } from 'vue';
 
-    import allanAvatar from '@/assets/avatars/allanavatar.jpg';
+    import allanAvatar from '/public/avatars/allanavatar.jpg';
 
     const props = defineProps({
         fullName: String,
@@ -70,7 +70,7 @@ let prev = () => {
                         <div class="card-btn">
                             <div class="trainer-card">
                                 <div class="card-content">
-                                    <div class="allanimg" :style="{ backgroundImage: `url(${allanAvatar})`}"></div>
+                                    <div class="allanimg avatar-img-s"></div>
                                     <p class="body-large body-bold">Allan</p>
                                     <p class="card-bio">Allan er medstifter af Strong4life og har ...</p>
                                 </div>
@@ -83,7 +83,7 @@ let prev = () => {
                         <div class="card-btn">
                             <div class="trainer-card">
                                 <div class="card-content">
-                                    <div class="avatar"></div>
+                                    <div class="oleimg avatar-img-s"></div>
                                     <p class="body-large body-bold">Ole</p>
                                     <p class="card-bio">Ole er medstifter af Strong4life og er med til ...</p>
                                 </div>
@@ -96,7 +96,7 @@ let prev = () => {
                         <div class="card-btn">
                             <div class="trainer-card">
                                 <div class="card-content">
-                                    <div class="avatar"></div>
+                                    <div class="emilieimg avatar-img-s"></div>
                                     <p class="body-large body-bold">Emilie</p>
                                     <p class="card-bio">Emilie er personlig træner, og specialiserer sig i...</p>
                                 </div>
@@ -109,7 +109,7 @@ let prev = () => {
                         <div class="card-btn">
                             <div class="trainer-card">
                                 <div class="card-content">
-                                    <div class="avatar"></div>
+                                    <div class="kristianimg avatar-img-s"></div>
                                     <p class="body-large body-bold">Kristian</p>
                                     <p class="card-bio">Kristian har en bachelor i Idræt og Sundhed, og...</p>
                                 </div>
@@ -122,7 +122,7 @@ let prev = () => {
                         <div class="card-btn">
                             <div class="trainer-card">
                                 <div class="card-content">
-                                    <div class="avatar"></div>
+                                    <div class="madsimg avatar-img-s"></div>
                                     <p class="body-large body-bold">Mads</p>
                                     <p class="card-bio">Mads er personlig træner og fordyber sig i...</p>
                                 </div>
