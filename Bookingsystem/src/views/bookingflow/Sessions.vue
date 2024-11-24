@@ -1,13 +1,13 @@
 <script setup>
 import { ref } from 'vue';
 import { db } from '@/firebase';
-import { ref as dbRef, onValue } from 'firebase/database';
+import { ref as dbRef, onValue, remove } from 'firebase/database';
 import Back from '@/components/Back.vue';
 const bookedSessions = ref([]);
 
 // Fetch booked sessions dynamically based on the unique keys (date__time)
 const fetchBookedSessions = () => {
-  const bookedSessionsRef = dbRef(db, 'trainerInfo/booked-sessions');
+  const bookedSessionsRef = dbRef(db, 'trainerInfo/booked-sessions/');
   
   onValue(bookedSessionsRef, (snapshot) => {
     if (snapshot.exists()) {
@@ -21,6 +21,7 @@ const fetchBookedSessions = () => {
         const userDetails = sessionData.userDetails || {};
 
         sessions.push({
+          sessionKey,
           fullName: userDetails._value.fullName,
           date: sessionDetails._value.date,
           time: sessionDetails._value.time,
@@ -33,12 +34,19 @@ const fetchBookedSessions = () => {
       }
 
       bookedSessions.value = sessions;
+    } else {
+      // Handle case where no sessions exist in the database
+      bookedSessions.value = [];
     }
   });
 };
-
 // Call function to fetch data on component creation
 fetchBookedSessions();
+
+const removeTrainerCard = (sessionKey) =>{
+  const deleteSessionRef = dbRef(db, `trainerInfo/booked-sessions/${sessionKey}`)
+  remove(deleteSessionRef);
+}
 
 </script>
 
@@ -60,6 +68,7 @@ fetchBookedSessions();
         <p>Foretrækker at blive kontaktet på: {{ session.contactPref }} </p>  
         <p>Telefonnummer: {{ session.phone }} </p>  
         <p>Email: {{ session.email }} </p>  
+        <button @click="removeTrainerCard(session.sessionKey)"> Fjern Tid</button>
       </li>
     </ul>
   </div>

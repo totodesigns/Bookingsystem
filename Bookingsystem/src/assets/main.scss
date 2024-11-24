@@ -474,7 +474,7 @@ hr {
     gap: 24px;
     align-self: stretch;
 }
-
+// ____________________________
 .flow-block {
     display: flex;
     padding: 64px 78px;
@@ -516,7 +516,7 @@ hr {
 
 .choose-card {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
     gap: 12px;
     align-self: stretch;
