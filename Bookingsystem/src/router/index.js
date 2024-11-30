@@ -21,6 +21,7 @@ import ChooseTrainer from '../views/bookingflow/ChooseTrainer.vue'
 import ChooseOption from '../views/bookingflow/ChooseOption.vue'
 import PostSession from '../views/bookingflow/PostSession.vue'
 import Sessions from '../views/bookingflow/Sessions.vue'
+import Tak from '../views/bookingflow/Thanks.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -134,6 +135,11 @@ const router = createRouter({
       path: '/sessions',
       name: 'sessions',
       component: Sessions,
+    },
+    {
+      path: '/tak',
+      name: 'tak',
+      component: Tak,
     },
 
   ]

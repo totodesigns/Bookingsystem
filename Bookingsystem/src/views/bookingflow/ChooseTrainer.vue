@@ -5,11 +5,8 @@
     import Ole from '@/components/Trainers/Ole.vue';
     import Emilie from '@/components/Trainers/Emilie.vue';
     import Kristian from '@/components/Trainers/Kristian.vue';
-    import Marete from '@/components/Trainers/Marete.vue';
     import Mads from '@/components/Trainers/Mads.vue';
     import { defineProps } from 'vue';
-
-    import allanAvatar from '/public/avatars/allanavatar.jpg';
 
     const props = defineProps({
         fullName: String,
@@ -24,7 +21,6 @@
     const OleTime = ref(false);
     const EmilieTime = ref(false);
     const KristianTime = ref(false);
-    const MareteTime = ref(false);
     const MadsTime = ref(false);
 
     const selectedTrainer =ref(null);
@@ -39,7 +35,6 @@
       trainer3: false, 
       trainer4: false, 
       trainer5: false, 
-      trainer6: false,
     });
 
     const togglePopup = (trainer) => {
@@ -53,12 +48,11 @@
 }
 let showTrainerTime = () => {
   wrapper.value = false;
-  AllanTime.value = OleTime.value = EmilieTime.value = KristianTime.value = MareteTime.value = MadsTime.value = false;
+  AllanTime.value = OleTime.value = EmilieTime.value = KristianTime.value = MadsTime.value = false;
     if (selectedTrainer.value === "Allan") AllanTime.value = true;
     if (selectedTrainer.value === "Ole") OleTime.value = true;
     if (selectedTrainer.value === "Emilie") EmilieTime.value = true;
     if (selectedTrainer.value === "Kristian") KristianTime.value = true;
-    if (selectedTrainer.value === "Marete") MareteTime.value = true;
     if (selectedTrainer.value === "Mads") MadsTime.value = true;
 };
 
@@ -70,7 +64,6 @@ let prev = () => {
 </script>
 
 <template>
-  
     <div class="content" v-if="!showFormView">
         <div class="flow-block" v-if="wrapper">
             <div class="flow-content">
@@ -152,8 +145,8 @@ let prev = () => {
                 </div>
             </div>
             <div class="flow-btns" v-if="wrapper">
-                <button type="button" @click="prev" class="default-secondary-btn">TILBAGE</button>
-                <button :disabled="!selectedTrainer" @click="showTrainerTime" class="default-primary-btn">FORTSÆT</button>
+                <button type="button" @click="prev" class="default-secondary-btn">PERSONLIGE OPLYSNINGER</button>
+                <button :disabled="!selectedTrainer" @click="showTrainerTime" class="default-primary-btn">FORTSÆT TIL VÆLG TID</button>
             </div>
         </div>
     </div>
@@ -182,13 +175,6 @@ let prev = () => {
         :message="message" />
 
     <Kristian v-if="KristianTime" 
-        :fullName="fullName" 
-        :contactPref="contactPref" 
-        :phone="phone" 
-        :email="email" 
-        :message="message" />
-
-    <Marete v-if="MareteTime" 
         :fullName="fullName" 
         :contactPref="contactPref" 
         :phone="phone" 

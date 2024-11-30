@@ -6,123 +6,110 @@ import { defineProps } from 'vue';
 import ChooseTrainer from '@/views/bookingflow/ChooseTrainer.vue';
 import Confirmation from '@/views/bookingflow/Confirmation.vue';
 
+const wrapper = ref(true);
+
 // Routing
 const showConfirmationView = ref(false);
 let confirm = () => {
   showConfirmationView.value = true;
-}
+};
 const showTrainerView = ref(false);
 let prev = () => {
-    showTrainerView.value = true;
+  showTrainerView.value = true;
 };
+
 // Props
 const props = defineProps({
-    fullName: String,
-    contactPref: String,
-    phone: Number,
-    email: String,
-    message: String,
+  fullName: String,
+  contactPref: String,
+  phone: Number,
+  email: String,
+  message: String,
 });
 
-// "sessions" er et tomt array, der holder alle sessions fra db2.
+// Sessions and database handling
 const sessions = ref([]);
 const sessionsRef = dbRef(db, `trainerInfo/kristian/sessions`);
 
 onValue(sessionsRef, (snapshot) => {
-    if (snapshot.exists()) {
-        // Hvis der findes et objekt i databasen (snapshot), så smid det i sessions-array.
-        sessions.value = snapshot.val();
-    }
+  if (snapshot.exists()) {
+    sessions.value = snapshot.val();
+  }
 });
 
+// Selected session
 const selectedSession = ref(null);
 
-// Function to handle session selection
 const selectSession = (sessionId) => {
-    selectedSession.value = sessionId;
+  selectedSession.value = sessionId;
+};
+
+// Function to get button class based on selection
+const getSessionClass = (sessionId) => {
+  return selectedSession.value === sessionId ? 'clicked-radio-btn' : 'default-radio-btn';
 };
 
 // Save selected session to local storage
 const submitSession = () => {
-    if (!selectedSession.value) return;
+  if (!selectedSession.value) return;
 
-    const sessionId = selectedSession.value;
-    const sessionData = sessions.value[sessionId]; // Access session details by ID
+  const sessionId = selectedSession.value;
+  const sessionData = sessions.value[sessionId]; // Access session details by ID
 
-    if (sessionData) {
-        const bookingData = {
-            sessionId,
-            sessionDetails: sessionData,
-            userDetails: {
-                fullName: props.fullName,
-                contactPref: props.contactPref,
-                phone: props.phone,
-                email: props.email,
-                message: props.message,
-            },
-        };
+  if (sessionData) {
+    const bookingData = {
+      sessionId,
+      sessionDetails: sessionData,
+      userDetails: {
+        fullName: props.fullName,
+        contactPref: props.contactPref,
+        phone: props.phone,
+        email: props.email,
+        message: props.message,
+      },
+    };
 
-        // Save booking data to local storage
-        localStorage.setItem('selectedSession', JSON.stringify(bookingData));
-        console.log('Session data saved to local storage:', bookingData);
-    }
-    confirm();
+    // Save booking data to local storage
+    localStorage.setItem('selectedSession', JSON.stringify(bookingData));
+    console.log('Session data saved to local storage:', bookingData);
+  }
+  confirm();
 };
 </script>
 
 <template>
-  <div v-if="!showConfirmationView">
-    <h1 v-if="!showTrainerView">Kristians Kalender</h1>
-    <div v-if="!showTrainerView" class="screenWrapper">
-        <h2> Hej {{ fullName }}. Vælg ønsket tid </h2>
-        <ul class="trainerCardWrapper">
-            <li v-for="(session, id) in sessions" :key="id" class="trainerCard">
-                <p>Dato: {{ session.date }} </p>
-                <p>Tid: {{ session.time }} </p>
-                <button @click="selectSession(id)">Vælg tid</button>
-            </li>
-        </ul>
-        <div>
-            <button @click="prev">Tilbage til trænere</button>
-            <button :disabled="!selectedSession" @click="submitSession">Fortsæt</button>
+  <div class="content">
+    <div class="flow-block">
+      <div v-if="!showConfirmationView" class="stretch choose-card">
+        <div class="flow-header">
+          <p class="t1">Kristians Kalender</p>
+          <hr />
         </div>
+        <div v-if="!showTrainerView" class="stretch">
+          <ul class="time-cards">
+            <li v-for="(session, id) in sessions" :key="id" class="time-card">
+              <p><b>Dato:</b> {{ session.date }}</p>
+              <p><b>Tid:</b> {{ session.time }}</p>
+              <button :class="getSessionClass(id)" @click="selectSession(id)">
+                Vælg tid
+              </button>
+            </li>
+          </ul>
+        </div>
+        <div class="flow-btns" v-if="wrapper">
+          <button type="button" @click="prev" class="default-secondary-btn">VÆLG EN ANDEN TRÆNER</button>
+          <button :disabled="!selectedSession" @click="submitSession" class="default-primary-btn">GÅ TIL BOOKINGOVERSIGT</button>
+        </div>
+      </div>
+      <ChooseTrainer v-if="showTrainerView" />
+      <Confirmation
+        v-if="showConfirmationView"
+        :fullName="fullName"
+        :contactPref="contactPref"
+        :phone="phone"
+        :email="email"
+        :message="message"
+      />
     </div>
   </div>
-    <ChooseTrainer v-if="showTrainerView"/>
-    <Confirmation v-if="showConfirmationView"
-    :fullName="fullName" 
-    :contactPref="contactPref" 
-    :phone="phone" 
-    :email="email" 
-    :message="message"/>
 </template>
-
-<style scoped>
-li {
-    list-style: none;
-}
-
-* {
-    box-sizing: border-box;
-}
-
-.screenWrapper {
-    margin: 20px;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-.trainerCardWrapper {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-}
-
-.trainerCard {
-    padding: 16px;
-    border: 1px solid black;
-    width: fit-content;
-}
-</style>

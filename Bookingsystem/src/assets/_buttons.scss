@@ -167,6 +167,18 @@ button:disabled {
     background-color: c.$neutral-2;
 }
 
+.default-success-btn {
+    padding: 16px 24px;
+    color: c.$neutral-1;
+    border: none;
+    border-radius: 8px;
+    background-color: c.$green-1;
+    transition: 0.2s ease;
+    &:hover {
+        background-color: c.$green-2;
+    }
+}
+
 .default-radio-btn {
     display: flex;
     width: 100%;

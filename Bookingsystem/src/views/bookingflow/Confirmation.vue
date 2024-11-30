@@ -5,7 +5,9 @@ import { ref as dbRef, set } from 'firebase/database';
 import { defineProps } from 'vue';
 import MemberForm from '@/components/MemberForm.vue';
 import ChooseTrainer from './ChooseTrainer.vue';
-import Thanks from './Thanks.vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
 
 const activeView = ref('confirmation'); // Default to the confirmation page
 
@@ -70,12 +72,12 @@ const completeSignup = async () => {
 
 
     console.log("Signup data saved successfully!");
-    alert("Signup complete!");
   } catch (error) {
     console.error("Error saving data:", error);
     alert("An error occurred while completing your signup. Please try again.");
   }
   confirm();
+  router.push("/tak")
 };
 
 
@@ -84,30 +86,69 @@ const completeSignup = async () => {
 
 
 <template>
-  <div v-if="activeView === 'confirmation'">
-    <h1>Booking Confirmation</h1>
-    <div>
-      <h2>User Details</h2>
-      <button @click="setActiveView('memberForm')">Rediger1</button>
+  <div v-if="activeView === 'confirmation'" class="text-gap-l stretch">
+    <div class="flow-header">
+        <p class="t1">Bookingoversigt</p>
+        <hr />
     </div>
-    <p><strong>Full Name:</strong> {{ userDetails.fullName || 'N/A' }}</p>
-    <p><strong>Contact Preference:</strong> {{ userDetails.contactPref || 'N/A' }}</p>
-    <p><strong>Phone:</strong> {{ userDetails.phone || 'N/A' }}</p>
-    <p><strong>Email:</strong> {{ userDetails.email || 'N/A' }}</p>
-    <p><strong>Message:</strong> {{ userDetails.message || 'N/A' }}</p>
-    <div>
-      <h2>Session Details</h2>
-      <button @click="setActiveView('chooseTrainer')">Rediger2</button>
+    <div class="text-gap-l stretch">
+      <div class="btn-pair">
+        <p class="t2">1. Personlige oplysninger</p>
+        
+        <button class="icon-tertiary-btn" @click="setActiveView('memberForm')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M15 5L8 12L15 19" class="chevron grey-i"/>
+          </svg>
+          Redigér
+        </button>
+      </div>
+      <div class="text-gap-xs">
+        <p class="caption">Fornavn og efternavn</p>
+        <p class="body-large">{{ userDetails.fullName || 'N/A' }}</p>
+      </div>
+      <div class="text-gap-xs">
+        <p class="caption">Email</p>
+        <p class="body-large">{{ userDetails.email || 'N/A' }}</p>
+      </div>
+      <div class="text-gap-xs">
+        <p class="caption">Telefonnummer</p>
+        <p class="body-large">{{ userDetails.phone || 'N/A' }}</p>
+      </div>
+      <div class="text-gap-xs">
+        <p class="caption">Besked</p>
+        <p class="body-large">{{ userDetails.message || 'N/A' }}</p>
+      </div>
+      <div class="text-gap-xs">
+        <p class="caption">Du vil blive kontaktet gennem:</p>
+        <p class="body-large">{{ userDetails.contactPref || 'N/A' }}</p>
+      </div>
     </div>
-    <p><strong>Session ID:</strong> {{ bookingData.sessionId || 'N/A' }}</p>
-    <p><strong>Trainer:</strong> {{ sessionDetails.name || 'N/A' }}</p>
-    <p><strong>Date:</strong> {{ sessionDetails.date || 'N/A' }}</p>
-    <p><strong>Time:</strong> {{ sessionDetails.time || 'N/A' }}</p>
-    <button @click="completeSignup()">Complete Signup</button>
+    <hr>
+    <div class="text-gap-l stretch">
+      <div class="btn-pair">      
+        <p class="t2">2. Træningsoplysninger</p>
+        <button class="default-tertiary-btn" @click="setActiveView('chooseTrainer')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M15 5L8 12L15 19" class="chevron grey-i"/>
+          </svg>
+          Redigér
+        </button>
+      </div>
+      <div class="text-gap-xs">
+        <p class="caption">Træner</p>
+        <p class="body-large">{{ sessionDetails.name || 'N/A' }}</p>
+      </div>
+      <div class="text-gap-xs">
+        <p class="caption">Dato</p>
+        <p class="body-large">{{ sessionDetails.date || 'N/A' }}</p>
+      </div>
+      <div class="text-gap-xs">
+        <p class="caption">Tid</p>
+        <p class="body-large">{{ sessionDetails.time || 'N/A' }}</p>
+      </div>
+      <button class="default-success-btn stretch" @click="completeSignup()">ANMOD BOOKING</button>
+    </div>
   </div>
-
-  <!-- Thanks Page -->
-  <Thanks v-if="activeView === 'thanks'" />
 
   <!-- Member Form -->
   <MemberForm v-if="activeView === 'memberForm'" />

@@ -71,9 +71,9 @@ const skip = () => {
       <div class="form">
         <label for="contactPreference">Hvordan vil du kontaktes?*</label>
         <select v-model="contactPref" id="contactPreference" class="short-form form-style">
-          <option value="call">På Telefon</option>
-          <option value="sms">På SMS</option>
-          <option value="email">På Email</option>
+          <option value="Telefonopkald">På Telefon</option>
+          <option value="SMS">På SMS</option>
+          <option value="Email">På Email</option>
         </select>
       </div>
     </div>
@@ -84,7 +84,6 @@ const skip = () => {
       <p id="error-color" v-if="errorMessage">{{ errorMessage }}</p>
     </div>
   </div>
-
 
   <ChooseTrainer v-if="showTrainerView"
     :fullName="name"
