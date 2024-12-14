@@ -2,7 +2,9 @@
 import { ref } from "vue";
 import { db } from "../../firebase";
 import { set, ref as dbRef } from "firebase/database";
-import Back from '@/components/Back.vue';
+import NavBar from '@/components/NavBar.vue'
+import { useRouter } from 'vue-router';
+
 const name = ref("");
 const date = ref("");
 const time = ref("");
@@ -59,10 +61,17 @@ async function postTime() {
     error.value = ""; // Reset any previous error
 }
 
+// Forbedring
+const router = useRouter();
+let goToChooseOption = () => {
+    router.push("/ChooseOption");
+};
 </script>
 
 <template>
-  <Back />
+  <NavBar></NavBar>
+  <div class="wrapper">
+  <button class="backButton" @click="goToChooseOption">< Tilbage til Oversigt </button>
   <div>
     <h2>Opret tider</h2>
     <form @submit.prevent="postTime">
@@ -74,4 +83,18 @@ async function postTime() {
     <p v-if="error" style="color: red;">{{ error }}</p>
     <p v-if="message" style="color: green;">{{ message }}</p>
   </div>
+  </div>
 </template>
+
+<style scoped>
+  .backButton{
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    text-decoration: underline;
+  }
+
+  .wrapper {
+    margin-left: 4vw;
+  }
+</style>

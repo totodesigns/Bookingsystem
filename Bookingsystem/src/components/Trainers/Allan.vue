@@ -110,6 +110,5 @@ const submitSession = () => {
         :email="email"
         :message="message"
       />
-    </div>
-  </div>
+    </div></div>
 </template>

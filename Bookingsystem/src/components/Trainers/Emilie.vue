@@ -78,11 +78,11 @@ const submitSession = () => {
 </script>
 
 <template>
-  <div class="content">
+  <div class="content" >
     <div class="flow-block">
       <div v-if="!showConfirmationView" class="stretch choose-card">
         <div class="flow-header">
-          <p class="t1">Emuilies Kalender</p>
+          <p class="t1">Emilies Kalender</p>
           <hr />
         </div>
         <div v-if="!showTrainerView" class="stretch">

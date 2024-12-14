@@ -6,7 +6,7 @@
 
 <template>
     <NavBar />
-    <div>
+    <div >
         <MemberForm />
     </div>
 </template>

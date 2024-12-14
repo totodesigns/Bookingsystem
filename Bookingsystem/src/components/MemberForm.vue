@@ -42,9 +42,10 @@ const skip = () => {
 </script>
 
 <template>
+<div v-if="!showTrainerView">
   <div class="content">
     <ProgressBar />
-    <div class="flow-block" v-if="!showTrainerView">
+    <div class="flow-block" >
       <div class="flow-content">
       <div class="flow-header">
         <p class="t1">Personlige Oplysninger</p>
@@ -77,7 +78,7 @@ const skip = () => {
         </select>
       </div>
     </div>
-
+</div>
 
       <button type="button" @click="next" class="default-primary-btn stretch">Fortsæt</button>
       <button type="button" @click="skip" class="default-secondary-btn stretch">Skip</button>

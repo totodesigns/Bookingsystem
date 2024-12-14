@@ -1,7 +1,7 @@
 <script setup>
     import LoginForm from '@/components/LoginForm.vue';
     import NavBar from '@/components/NavBar.vue';
-    import RegistrationForm from '@/components/RegistrationForm.vue';
+ 
 
 </script>
 
@@ -12,9 +12,16 @@
         <div class="flow-block">
             <LoginForm />
         </div>
-        <div class="flow-block">
-            <RegistrationForm />
-        </div>
+
     </div>
 
 </template>
+
+<style scoped>
+
+.flow-block{
+ max-width: 50vw;
+ margin-left: 25vw;
+}
+</style>
+

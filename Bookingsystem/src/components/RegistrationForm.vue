@@ -2,10 +2,13 @@
 import { ref} from "vue";
 import { db } from "../firebase";
 import { ref as dbRef, set } from "firebase/database";
+import NavBar from '@/components/NavBar.vue'
+import { useRouter } from 'vue-router';
 
 const name = ref("");
 const email = ref("");
 const password = ref("");
+const message = ref("");
 
 async function register() {
     const usersRef = dbRef(db, "trainerInfo/" + name.value.toLowerCase()); //says the data vill go to trainerinfo in the db
@@ -21,13 +24,27 @@ async function register() {
     name.value = "";
     email.value = "";
     password.value = "";
+    message.value = "Træner Registreret!";
 }
+
+
+// forbedring
+const router = useRouter();
+let goToChooseOption = () => {
+    router.push("/ChooseOption");
+    
+};
+
 </script>
 
 <template>
+  <NavBar></NavBar>
+
+
   <div class="flow-content">
+    <button @click="goToChooseOption">< Tilbage til Oversigt</button>
     <div class="flow-header">
-      <p class="t1">Registrér ny træner</p>
+      <p class="t1">Opret ny træner</p>
       <hr>
     </div>
     <form @submit.prevent="register" class="formular">
@@ -43,7 +60,16 @@ async function register() {
         <label>Password</label>
         <input v-model="password" type="password" placeholder="Password" required class="form-style"/>
       </div>
-      <button type="submit" class="default-primary-btn stretch">REGISTRÉR</button> <!-- @click="windowBtn" -->
+      <button type="submit" class="default-primary-btn stretch">OPRET TRÆNER</button> <!-- @click="windowBtn" -->
+      <p style="color: green;">{{ message }}</p>
     </form>
   </div>
 </template>
+
+<style scoped>
+
+.flow-content{
+  max-width: 33vw;
+  margin-left: 4vw;
+}
+</style>

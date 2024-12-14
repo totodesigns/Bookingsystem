@@ -2,7 +2,8 @@
 import { ref } from 'vue';
 import { db } from '@/firebase';
 import { ref as dbRef, onValue, remove } from 'firebase/database';
-import Back from '@/components/Back.vue';
+import NavBar from '@/components/NavBar.vue'
+import { useRouter } from 'vue-router';
 const bookedSessions = ref([]);
 
 // Fetch booked sessions dynamically based on the unique keys (date__time)
@@ -48,13 +49,22 @@ const removeTrainerCard = (sessionKey) =>{
   remove(deleteSessionRef);
 }
 
+
+// forbedring
+const router = useRouter();
+let goToChooseOption = () => {
+    router.push("/ChooseOption");
+};
+
 </script>
 
 <template>  
-<back/>
+<NavBar></NavBar>
+  
+
   <div class="screenWrapper">
-    <h1> Se alle kommende tider </h1>
-    
+    <button class="backButton" @click="goToChooseOption">< Tilbage til Oversigt </button>
+    <h1> Se alle kommende tider </h1> 
     <!-- Loop through and display all booked sessions -->
     <ul class="trainerCardWrapper">
       <li v-for="(session, index) in bookedSessions" :key="index" class="trainerCard">
@@ -89,6 +99,7 @@ const removeTrainerCard = (sessionKey) =>{
     display: flex;
     flex-direction: column;
     gap: 20px;
+    margin-left: 4vw;
   }
   .trainerCardWrapper {
     display: flex;
@@ -101,4 +112,12 @@ const removeTrainerCard = (sessionKey) =>{
     border: 1px solid black;
     width: fit-content;
   }
+
+  .backButton{
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    text-decoration: underline;
+  }
+
 </style>

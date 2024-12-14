@@ -64,7 +64,8 @@ let prev = () => {
 </script>
 
 <template>
-    <div class="content" v-if="!showFormView">
+  <div class="content"></div>
+    <div v-if="!showFormView">
         <div class="flow-block" v-if="wrapper">
             <div class="flow-content">
                 <div class="flow-header">
@@ -150,6 +151,7 @@ let prev = () => {
             </div>
         </div>
     </div>
+
     <MemberForm v-if="showFormView"/>
 
     <!-- props? -->
