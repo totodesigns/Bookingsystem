@@ -21,8 +21,6 @@ let staerkovergang
  = () => {
   router.push("/staerkovergang")
 }
-
-
 </script>
 
 <template>
